@@ -1,0 +1,19 @@
+.fade {
+	animation-name: fade;
+	animation-duration: 1.5s;
+}
+  
+@keyframes fade{
+	from {opacity: .1}
+	to {opacity: 1}
+}
+
+.fadescale {
+	animation-name: fadeScale;
+	animation-duration: 1s;
+}
+  
+@keyframes fadeScale{
+	from {transform:scale(0)}
+	to {transform:scale(1)}
+}
