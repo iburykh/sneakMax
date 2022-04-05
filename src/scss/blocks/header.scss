@@ -1,0 +1,52 @@
+.header {
+	padding: 20px 0px;
+	background-color: $main-color;
+}
+.header__container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.header__logo {
+	font-weight: 700;
+	font-size: 30px;
+	color: $color-white;
+}
+.header__menu {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.menu {
+}
+.menu__list {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0px -20px
+}
+.menu__item {
+	padding: 0px 20px;
+	font-weight: 400;
+	font-size: 14px;
+	color: $color-white;
+}
+.menu__link {
+}
+.cart {
+	position: relative;
+	margin-left: 10px;
+}
+.cart__count {
+	position: absolute;
+	right: -6px;
+	bottom: -2px;
+	width: 16px;
+	height: 16px;
+	background-color: $color-accent;
+	border-radius: 100%;
+	position: absolute;
+	font-weight: normal;
+	font-size: 14px;
+	color: $color-white;
+}

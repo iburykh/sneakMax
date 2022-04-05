@@ -5,10 +5,10 @@
 }
 
 body {
-    font-family: 'OpenSans', sans-serif;
+    font-family: 'Intro', sans-serif;
     color: #000;
     background-color: #fff;
-    font-weight: 400;
+    font-weight: normal;
     font-size: 14px;
     &.scroll-lock {
         overflow: hidden;
@@ -29,6 +29,9 @@ a {
 }
 
 button {
+    border: none;
+    padding: 0;
+    background: transparent;
     cursor: pointer;
 }
 

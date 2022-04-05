@@ -3,7 +3,7 @@
 @import 'global/fonts.scss';
 @import 'global/base.scss';
 @import 'global/container.scss';
-@import 'global/animation.scss';
+// @import 'global/animation.scss';
 
 //============libs============
 @import 'libs_css/normalize.scss';
@@ -11,4 +11,4 @@
 // @import 'libs_css/swiper-bundle.scss';
 
 //============blocks==========
-// @import 'blocks/header.scss';
+@import 'blocks/header.scss';
