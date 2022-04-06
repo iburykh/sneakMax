@@ -1,11 +1,8 @@
-import 'nodelist-foreach-polyfill';
-
-// import menuBurger from './modules/menuBurger';
-// import form from './modules/form';
-// import slider from './modules/slider';
-
 'use strict';
 
-// window.noZensmooth = true;
+// forEach Polyfill
+if (window.NodeList && !NodeList.prototype.forEach) {
+    NodeList.prototype.forEach = Array.prototype.forEach;
+}
 
-// menuBurger();
+// window.noZensmooth = true;

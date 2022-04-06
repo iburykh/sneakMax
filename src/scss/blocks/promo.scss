@@ -1,0 +1,79 @@
+.promo {
+	position: relative;
+	min-height: 528px;
+	background-color: $main-color;
+	padding: 164px 0px 100px 0px;
+	@media (max-width: 768px) {
+		min-height: 445px;
+		padding: 130px 0px 50px 0px;
+	}
+
+	&__container {
+		position: relative;
+		z-index: 2;
+	}
+
+	&__title {
+		max-width: 50%;
+		font-weight: 400;
+		font-size: 36px;
+		line-height:calc(50 / 36);
+		color: $color-white;
+		@media (max-width: 1200px) {
+			max-width: 80%;
+		}
+		@media (max-width: 768px) {
+			font-size: 30px;
+		}
+		@media (max-width: 576px) {
+			font-size: 20px;
+			max-width: 100%;
+			text-align: center;
+		}
+	}
+
+	&__descr {
+		max-width: 50%;
+		margin-top: 20px;
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 22px;
+		color: $color-white;
+		@media (max-width: 1200px) {
+			max-width: 80%;
+		}
+		@media (max-width: 576px) {
+			font-size: 14px;
+			max-width: 100%;
+			text-align: center;
+		}
+	}
+	&__bg-text {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		z-index: 0;
+		transform: translate(-50%, -50%);
+		margin-top: 50px;
+		font-weight: 700;
+		font-size: 200px;
+		color: rgba(255, 255, 255, 0.12);
+		@media (max-width: 992px) {
+			font-size: 130px;
+		}
+		@media (max-width: 768px) {
+			font-size: 100px;
+			margin-top: 0;
+		}
+		@media (max-width: 576px) {
+			display: none;
+		}
+	}
+	&__btn {
+		margin-top: 40px;
+		@media (max-width: 576px) {
+			margin: 40px auto 0px auto;
+			text-align: center;
+		}
+	}
+}
