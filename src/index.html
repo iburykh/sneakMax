@@ -31,9 +31,7 @@
 						</ul>
 					</nav>
 					<button class="cart btn-reset">
-						<svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M20 6.57893H16.6038L13.0359 0.319309C12.8589 0.0083658 12.475 -0.093156 12.1784 0.0938088C11.8823 0.280773 11.7865 0.684867 11.9641 0.996475L15.1461 6.57893H4.85388L8.03587 0.996431C8.21348 0.684823 8.11767 0.280729 7.82164 0.0937645C7.52439 -0.0932003 7.14173 0.00832153 6.96411 0.319265L3.39617 6.57888H0V7.89468H1.35651L2.94432 16.8103C3.11033 17.7438 3.88547 18.421 4.78761 18.421H15.2124C16.1145 18.421 16.8896 17.7438 17.055 16.811L18.6434 7.89468H20C20 7.89468 20 6.57893 20 6.57893ZM15.8264 16.5688C15.7715 16.8797 15.5133 17.1053 15.2124 17.1053H4.78761C4.4867 17.1053 4.22854 16.8798 4.173 16.5681L2.62789 7.89468H17.3721L15.8264 16.5688Z" fill="white"/>
-						</svg>
+						<svg><use xlink:href="img/sprite.svg#cart"></use></svg>
 						<div class="cart__count">1</div>
 					</button>
 					<button class="hamburger btn-reset" aria-label="открыть навигацию">
@@ -58,11 +56,87 @@
 			<button class="promo__btn btn btn-reset">Перейти к покупкам</button>
 		</div>
 	</section>
+	<section class="catalog">
+		<div class="catalog__container container">
+			<h2 class="catalog__title title">Каталог</h2>
+			<div class="catalog__wrapper">
+				<div class="catalog__filters">
+					<h3 class="catalog__subtitle subtitle">Подбор по&nbsp;параметрам</h3>
+					<span class="catalog__caption">Цена, руб</span>
+					<div class="catalog-price">
+						<div class="catalog-price__wrapper">
+							<input type="text" class="catalog-price__input" id="input-0">
+							<input type="text" class="catalog-price__input" id="input-1">
+						</div>
+						<div class="catalog-price__element" id="range-slider"></div>
+					</div>
+					<span class="catalog__caption">Пол</span>
+					<div class="catalog-checkbox">
+						<div class="catalog-checkbox__item">
+							<input data-check class="catalog-checkbox__checkbox" id="cold" type="radio" name="checkbox-test">
+							<label for="cold" class="catalog-checkbox__label" tabindex="0"><span>мужской</span></label>
+						</div>
+						<div class="catalog-checkbox__item">
+							<input data-check class="catalog-checkbox__checkbox" id="cold" type="radio" name="checkbox-test">
+							<label for="cold" class="catalog-checkbox__label" tabindex="0"><span>женский</span></label>
+						</div>
+					</div>
+					<span class="catalog__caption">Размер</span>
+					<table class="catalog-sises">
+						<caption>Таблица размеров</caption>
+						<tr>
+							<td>35</td>
+							<td>36</td>
+							<td>37</td>
+						</tr>
+						<tr>
+							<td>38</td>
+							<td>39</td>
+							<td>40</td>
+						</tr>
+						<tr>
+							<td>41</td>
+							<td>42</td>
+							<td>43</td>
+						</tr>
+					</table>
+					<button class="catalog__btn btn btn-reset">Применить</button>
+					<button class="catalog__reset btn-reset">сбросить</button>
+				</div>
+				<div class="catalog__products">
+					<div class="catalog__wrap">
+						<article class="catalog-item">
+							<div class="catalog-item__img">
+								<picture>
+									<source srcset="img/image.webp" type="image/webp">
+									<img src="img/image.jpg" loading="lazy" alt="">
+								</picture>
+								<div class="catalog-item__btns">
+									<button class="catalog-item__btn btn-reset" aria-label="Показать информацию о товаре">
+										<svg><use xlink:href="img/sprite.svg#show"></use></svg>
+									</button>
+									<button class="catalog-item__btn btn-reset" aria-label="Добавить товар в корзину">
+										<svg><use xlink:href="img/sprite.svg#cart"></use></svg>
+									</button>
+								</div>
+								<h3 class="catalog-item__title">
+									Кроссовки Nike Air Force 1 '07 QS
+								</h3>
+								<span class="catalog-item__price">11 000 р</span>
+							</div>
+						</article>
+					</div>
+					<button class="catalog__more btn btn-reset">Показать еще</button>
+				</div>
+			</div>
+			
+		</div>
+	</section>
 
 	<!-- <script async src="resources/webp.min.js"></script> -->
 	<!-- <script async src="resources/focus-visible.min.js"></script> -->
 	<!-- <script async src="resources/zenscroll.min.js"></script> -->
-	<!-- <script async src="js/libs.js"></script> -->
+	<script async src="js/libs.js"></script>
 	<script async src="js/main.js"></script>
 </body>
 
