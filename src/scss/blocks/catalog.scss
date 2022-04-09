@@ -74,6 +74,11 @@
 		height: 50px;
 		border: 1px solid $color-gray;
 		background-color: transparent;
+		text-align: center;
+		padding: 0 10px;
+		font-weight: 400;
+		font-size: 16px;
+		color: $color-text;
 		&:first-child {
 			border-right: none;
 			border-top-left-radius: 4px;
@@ -85,6 +90,41 @@
 			border-top-right-radius: 4px;
 			border-bottom-right-radius: 4px;
 		  }
+	}
+	.noUi-connect {
+		background-color: $color-text;
+	}
+	.noUi-horizontal {
+		height: 2px;
+	}
+	.noUi-target {
+		background-color: $color-text;
+		border: none;
+		box-shadow: none;
+	}
+	.noUi-horizontal .noUi-handle {
+		width: 15px;
+		height: 15px;
+		border-radius: 100%;
+		top: -7px;
+	}
+	
+	.noUi-handle {
+		border: 2px solid $color-text;
+		border-radius: 3px;
+		background: $color-bg;
+		box-shadow: none;
+		cursor: pointer;
+		right: 0;
+	}
+	
+	.noUi-connect, .noUi-origin {
+		width: 94%;
+	}
+	
+	.noUi-handle::after,
+	.noUi-handle::before {
+	  display: none;
 	}
 
 	&__element {
