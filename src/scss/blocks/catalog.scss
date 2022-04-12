@@ -1,5 +1,5 @@
 .catalog {
-	margin-top: 55px;
+	padding: 60px 0px;
 
 	&__wrapper {
 		width: 100%;
@@ -12,7 +12,6 @@
 
 	&__filters {
 		flex: 0 0 24%;
-		// align-self: flex-start;
 		background-color: $color-bg;
 		padding: 20px;
 	}

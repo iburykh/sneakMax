@@ -1,0 +1,251 @@
+.quiz {
+	padding: 60px 0px;
+}
+.quiz-block {
+	padding: 40px 100px;
+	background-color: $color-bg;
+	border-radius: 4px;
+	display: none;
+	&.active {
+		display: block;
+	}
+
+	&__text {
+		display: inline-block;
+		width: 100%;
+		margin-top: 20px;
+		padding-bottom: 10px;
+		font-weight: 400;
+		font-size: 16px;
+		color: $color-light-text;
+		border-bottom: solid 1px $color-light-text;
+	}
+
+	&__subtitle {
+		margin-top: 20px;
+	}
+
+	&__wrapper {
+		margin-top: 20px;
+		padding-bottom: 40px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		row-gap: 20px;
+	}
+
+	&__item {
+		width: 280px;
+	}
+
+	&__img {
+		width: 100%;
+		height: 120px;
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+	}
+
+	&__footer {
+		padding-top: 20px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-top: solid 1px $color-light-text;
+	}
+
+	&__number {
+		font-weight: 400;
+		font-size: 16px;
+		color: $color-light-text;
+	}
+
+	&__btn {
+		padding: 17px 42px;
+		font-weight: 400;
+		font-size: 16px;
+		color: $color-text;
+		border: solid 1px $color-dark-text;
+		border-radius: 4px;
+		transition: all 0.3s ease 0s;
+		@media (hover: hover) and (pointer: fine) {
+			&:hover {
+				color: $color-white;
+				background-color: $color-text;
+			}
+		}
+	}
+	&__checkboxes {
+		margin-top: 30px;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		gap: 70px;
+	}
+	&__image {
+		margin-top: 22px;
+		position: relative;
+		padding: 0px 0px 28% 0px;
+		margin-bottom: 20px;
+		img {
+			object-fit: cover;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+		}
+	}
+	&__message{
+		margin: 20px 0px 122px 0px;
+		width: 465px;
+		height: 246px;
+		border: none;
+		border-radius: 4px;
+		padding: 20px;
+		font-weight: 400;
+		font-size: 16px;
+		color: $color-text;
+		background-color: $color-white;
+		&::placeholder {
+			color: $color-cameo;
+		}
+	}
+
+	.custom-checkbox {
+		position: relative;
+		&__input {
+			appearance: none;
+			position: absolute;
+		}
+
+		&__text {
+			margin-top: 10px;
+			color: $color-text;
+			font-weight: 400;
+			font-size: 16px;
+			position: relative;
+			cursor: pointer;
+			display: inline-flex;
+			align-items: center;
+			justify-content: start;
+			&::before {
+				content:'';
+				width: 24px;
+				height: 24px;
+				border: 1px solid $color-cameo;
+				border-radius: 4px;
+				margin-right: 10px;
+			}
+			&::after {
+				content:'';
+				position: absolute;
+				top: 7px;
+				left: 6px;
+				width: 15px;
+				height: 12px;
+				background-image: url('../img/check.svg');
+				background-repeat: no-repeat;
+				background-size: cover;
+				opacity: 0;
+				transition: opacity 0.3s ease-in-out;
+			}
+		}
+	}
+
+	.custom-checkbox__input:checked + .custom-checkbox__text::after {
+		opacity: 1;
+	}
+
+}
+.quiz-fin {
+	padding: 80px 100px 57px 100px;
+	&__text {
+		display: inline-block;
+		width: 100%;
+		margin-top: 20px;
+		padding-bottom: 24px;
+		font-weight: 400;
+		font-size: 18px;
+		color: $color-cameo;
+		border-bottom: solid 1px  $color-cameo;
+	}
+
+	.quiz-send {
+		position: relative;
+		margin-top: 24px;
+		padding: 40px;
+		background-color: $color-cameo;
+		border-radius: 4px;
+		width: 65%;
+		&__title {
+			font-weight: 700;
+			font-size: 36px;
+			color: $color-white;
+		}
+		&__descr {
+			display: inline-block;
+			margin-top: 15px;
+			font-weight: 400;
+			font-size: 18px;
+			color: $color-white;
+			margin-bottom: 14px;
+		}
+		&__input {
+			display: block;
+			margin-top: 10px;
+			padding: 20px;
+			background-color: $color-white;
+			border: none;
+			width: 90%;
+			border-radius: 4px;
+			font-weight: 400;
+			font-size: 16px;
+			color: $color-text;
+			&::placeholder {
+				color: $color-gray;
+			}
+		}
+	
+		&__btn {
+			margin-top: 20px;
+			min-width: 220px;
+		}
+	
+		&__phone {
+			position: absolute;
+			top: -13px;
+			right: -184px;
+			width: 205px;
+			height: 411px;
+			background: url('../img/iPhone.webp') center center/cover no-repeat;
+		}
+	
+		&__ok {
+			position: absolute;
+			top: -15px;
+			right: -184px;
+			width: 205px;
+			height: 411px;
+			background: url('../img/ok.webp') center center/contain no-repeat;
+			transform: scale(0.92);
+			opacity: 0;
+			transition: all 0.3s ease 0s;
+			.active {
+				opacity: 1;
+			}
+		}
+	}
+}
+.no-webp {
+	.quiz-form__phone {
+		background: url('../img/iPhone.png') center center/cover no-repeat;
+	}
+	&__ok {
+		background: url('../img/ok.png') center center/cover no-repeat;
+	}
+}

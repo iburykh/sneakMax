@@ -1,0 +1,82 @@
+.about {
+	position: relative;
+	background-color: $main-color;
+
+	&__figure {
+		position: absolute;
+		background: url('../img/figure.svg') center center/cover no-repeat;
+		left: 0;
+		top: 0;
+		width: 550px;
+		height: 424px;
+	}
+
+	&__container {
+		position: relative;
+		min-height: 580px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	&__title {
+		color: $color-white;
+		
+	}
+
+	&__descr {
+		margin-top: 20px;
+		width: 38%;
+	}
+
+	&__quote {
+		display: inline-block;
+		width: 84%;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 22.4px;
+		color: $color-white;
+		&::before,
+		&::after {
+		  display: none;
+		}
+	}
+
+	&__author {
+		margin-top: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		font-weight: 700;
+		font-size: 20px;
+		color: $color-white;
+		font-style: normal;
+		text-align: right;
+		&::before {
+			content:'';
+			display: inline-block;
+			width: 30px;
+			height: 3px;
+			background-color: $color-white;
+			margin-right: 20px;
+		}
+	}
+
+	&__bg-img {
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 680px;
+		height: 100%;
+		clip-path: polygon(25% 0, 100% 0, 75% 100%, 0 100%);
+		padding: 0px 0px 49% 0px;
+		img {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			object-fit: cover;
+		}
+	}
+}
