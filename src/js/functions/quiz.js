@@ -1,36 +1,77 @@
+//* В атрибуте name инпута указать имя для значения вопроса (напр. size: 37 - где size - имя)
+
 const quizForm = document.querySelector('.quiz-form');
-// const inputs = quizForm.querySelectorAll('input');
+const inputs = quizForm.querySelectorAll('input');
+let textareaText = null;
+let quizTmp = {};
+let quizReply = [];
 
-// объект для записи ответов
-let quizReply = {};
+// запись названия чекбокса в value
+inputs.forEach(input => {
+	if (input.type == 'checkbox' || input.type == 'radio') {
+		input.value = input.nextElementSibling.textContent;
+	}
+});
 
-// фукция записи данных в объект quizReply
-// elem - определенные элементы выбора, prop - название выбранного элемента
-
-
-function dataRecord (elem, prop) {
-	elem.forEach((item) => {
-		if (!item.disabled && item.type != 'file' && item.type != 'reset' && item.type != 'submit' && item.type != 'button') {
-			if (item.type != 'checkbox' && item.type != 'radio' && item.value) {
-				quizReply[prop] = item.value;
-			}
-		}
-	});
-}	
+// запись данных блока квиза во временный объект
 quizForm.addEventListener('change', (e) => {
 	let target = e.target;
 	if (target.tagName == 'INPUT') {
-		if (!target.type.disabled && target.type.type != 'file' && target.type != 'reset' && target.type != 'submit' && target.type != 'button') {
-			if (target.type != 'checkbox' && target.type != 'radio' && target.value) {
-				//!создать prop
-				quizReply[prop] = item.value;
-			} else if (target.type == 'checkbox' && target.type == 'radio' && target.checked) {
-				//!создать prop и value
-				quizReply[prop] = item.value;
-			}
-		}
-	} else {
-		let textarea = quizForm.querySelector('textarea');
-		textareaText = textarea.value;
+		quizTmp = serialize(document.querySelector('.quiz-form'));
+		console.log(quizTmp);
+	} else if (target.tagName == 'TEXTAREA') {
+		textareaText = target.value;
+		//! добавить в FormData
 	}
 });
+
+quizForm.addEventListener('click', (e) => {
+	if (e.target == document.querySelector('[data-next]')) {
+		addToSend();
+		nextQuestion();
+	}
+
+	if (e.target == document.querySelector('[data-send]')) {
+		send();
+	}
+});
+
+// function nextQuestion() {
+// 	if (this.valid()) {
+// 		console.log('next question!');
+// 		if (this.counter + 1 < this.dataLength) {
+// 			this.counter++;
+// 			this.$el.innerHTML = quizTemplate(quizData[this.counter], this.dataLength, this.options);
+
+// 			if (this.counter + 1 == this.dataLength) {
+// 				this.$el.insertAdjacentHTML('beforeend', `<button type="button" class="quiz-question__btn" data-send>${this.options.sendBtnText}</button>`);
+// 				this.$el.querySelector('[data-next-btn]').remove();
+// 			}
+// 		}
+// 	}
+// }
+
+function addToSend() {
+	quizReply.push(quizTmp)
+	// console.log(quizReply);
+	
+}
+// функция записи ответов в строку
+function serialize(form) {
+	let field, s = {};
+	let valueString = '';
+	if (typeof form == 'object' && form.nodeName == "FORM") {
+		let len = inputs.length;
+		for (let i = 0; i < len; i++) {
+			field = inputs[i];
+
+			if (field.name && !field.disabled && field.type != 'file' && field.type != 'reset' && field.type != 'submit' && field.type != 'button') {
+				if ((field.type != 'checkbox' && field.type != 'radio' && field.value) || field.checked) {
+					valueString += field.value + ',';
+					s[field.name] = valueString;
+				}
+			}
+		}
+	}
+	return s
+}
