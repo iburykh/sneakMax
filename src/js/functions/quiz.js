@@ -2,9 +2,19 @@
 
 const quizForm = document.querySelector('.quiz-form');
 const inputs = quizForm.querySelectorAll('input');
+const quizBlocks = quizForm.querySelectorAll('.quiz-block');
 let textareaText = null;
 let quizTmp = {};
 let quizReply = [];
+let blockIndex = 0;
+
+// функция показа только первого блока квиза
+showBlocks(blockIndex);
+
+function showBlocks(n) {
+	quizBlocks.forEach((item) => item.style.display = 'none');
+	quizBlocks[blockIndex].style.display = 'block';
+}
 
 // запись названия чекбокса в value
 inputs.forEach(input => {
@@ -18,7 +28,7 @@ quizForm.addEventListener('change', (e) => {
 	let target = e.target;
 	if (target.tagName == 'INPUT') {
 		quizTmp = serialize(document.querySelector('.quiz-form'));
-		console.log(quizTmp);
+		// console.log(quizTmp);
 	} else if (target.tagName == 'TEXTAREA') {
 		textareaText = target.value;
 		//! добавить в FormData
@@ -26,30 +36,43 @@ quizForm.addEventListener('change', (e) => {
 });
 
 quizForm.addEventListener('click', (e) => {
-	if (e.target == document.querySelector('[data-next]')) {
-		addToSend();
-		nextQuestion();
-	}
-
+	let nextBtn = quizForm.querySelectorAll('[data-next]');
+	nextBtn.forEach(btn => {
+		if (e.target == btn) {
+			e.preventDefault();
+			let target = e.target;
+			let block = target.closest('.quiz-block');
+			addToSend();
+			nextQuestion(block);
+			console.log(blockIndex);	
+		}
+	});
 	if (e.target == document.querySelector('[data-send]')) {
 		send();
 	}
 });
 
-// function nextQuestion() {
-// 	if (this.valid()) {
-// 		console.log('next question!');
-// 		if (this.counter + 1 < this.dataLength) {
-// 			this.counter++;
-// 			this.$el.innerHTML = quizTemplate(quizData[this.counter], this.dataLength, this.options);
+function nextQuestion(form) {
+	let formReq = form.querySelectorAll('.req');
+	formRemoveError(formReq);
+	let error = formValidate(formReq);
+	showBlocks(blockIndex += 1);
+	// if (error === 0) {
+	// 	showBlocks(blockIndex += 1);
+	// }
+	// if (this.valid()) {
+	// 	console.log('next question!');
+	// 	if (this.counter + 1 < this.dataLength) {
+	// 		this.counter++;
+	// 		this.$el.innerHTML = quizTemplate(quizData[this.counter], this.dataLength, this.options);
 
-// 			if (this.counter + 1 == this.dataLength) {
-// 				this.$el.insertAdjacentHTML('beforeend', `<button type="button" class="quiz-question__btn" data-send>${this.options.sendBtnText}</button>`);
-// 				this.$el.querySelector('[data-next-btn]').remove();
-// 			}
-// 		}
-// 	}
-// }
+	// 		if (this.counter + 1 == this.dataLength) {
+	// 			this.$el.insertAdjacentHTML('beforeend', `<button type="button" class="quiz-question__btn" data-send>${this.options.sendBtnText}</button>`);
+	// 			this.$el.querySelector('[data-next-btn]').remove();
+	// 		}
+	// 	}
+	// }
+}
 
 function addToSend() {
 	quizReply.push(quizTmp)

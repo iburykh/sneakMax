@@ -44,6 +44,9 @@ textarea {
 	-moz-appearance: none;
 	appearance: none;
     outline: none;
+    &.error {
+        border: solid 2px $color-accent;
+    }
 }
 
 textarea {
