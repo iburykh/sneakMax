@@ -350,7 +350,7 @@
 								</picture>
 							</div>
 							<label class="custom-checkbox">
-								<input data-check class="custom-checkbox__input req" type="checkbox" name="тип">
+								<input data-check class="custom-checkbox__input req" type="checkbox" name="type">
 								<span class="custom-checkbox__text" tabindex="0">кеды</span>
 							</label>
 						</div>
@@ -362,7 +362,7 @@
 								</picture>
 							</div>
 							<label class="custom-checkbox">
-								<input data-check class="custom-checkbox__input req" type="checkbox" name="тип">
+								<input data-check class="custom-checkbox__input req" type="checkbox" name="type">
 								<span class="custom-checkbox__text" tabindex="0">кроссовки</span>
 							</label>
 						</div>
@@ -374,7 +374,7 @@
 								</picture>
 							</div>
 							<label class="custom-checkbox">
-								<input data-check class="custom-checkbox__input  req" type="checkbox" name="тип">
+								<input data-check class="custom-checkbox__input  req" type="checkbox" name="type">
 								<span class="custom-checkbox__text" tabindex="0">туфли</span>
 							</label>
 						</div>
@@ -386,7 +386,7 @@
 								</picture>
 							</div>
 							<label class="custom-checkbox">
-								<input data-check class="custom-checkbox__input req" type="checkbox" name="тип"> 
+								<input data-check class="custom-checkbox__input req" type="checkbox" name="type"> 
 								<span class="custom-checkbox__text" tabindex="0">слипоны</span>
 							</label>
 						</div>
@@ -398,7 +398,7 @@
 								</picture>
 							</div>
 							<label class="custom-checkbox">
-								<input data-check class="custom-checkbox__input req" type="checkbox" name="тип">
+								<input data-check class="custom-checkbox__input req" type="checkbox" name="type">
 								<span class="custom-checkbox__text" tabindex="0">кеды</span>
 							</label>
 						</div>
@@ -410,7 +410,7 @@
 								</picture>
 							</div>
 							<label class="custom-checkbox">
-								<input data-check class="custom-checkbox__input req" type="checkbox" name="тип">
+								<input data-check class="custom-checkbox__input req" type="checkbox" name="type">
 								<span class="custom-checkbox__text" tabindex="0">кеды</span>
 							</label>
 						</div>
@@ -431,23 +431,23 @@
 					<h3 class="quiz-block__subtitle subtitle">Какой размер вам подойдет?</h3>
 					<div class="quiz-block__checkboxes">
 						<label class="custom-checkbox">
-							<input data-check class="custom-checkbox__input req" type="radio" name="size">
+							<input data-check class="custom-checkbox__input" type="radio" name="size">
 							<span class="custom-checkbox__text" tabindex="0">менее 36</span>
 						</label>
 						<label class="custom-checkbox">
-							<input data-check class="custom-checkbox__input req" type="radio" name="size">
+							<input data-check class="custom-checkbox__input" type="radio" name="size">
 							<span class="custom-checkbox__text" tabindex="0">36-38</span>
 						</label>
 						<label class="custom-checkbox">
-							<input data-check class="custom-checkbox__input req" type="radio" name="size">
+							<input data-check class="custom-checkbox__input" type="radio" name="size">
 							<span class="custom-checkbox__text" tabindex="0">39-41</span>
 						</label>
 						<label class="custom-checkbox">
-							<input data-check class="custom-checkbox__input req" type="radio" name="size">
+							<input data-check class="custom-checkbox__input" type="radio" name="size">
 							<span class="custom-checkbox__text" tabindex="0">42-44</span>
 						</label>
 						<label class="custom-checkbox">
-							<input data-check class="custom-checkbox__input req" type="radio" name="size">
+							<input data-check class="custom-checkbox__input" type="radio" name="size">
 							<span class="custom-checkbox__text" tabindex="0">45 и больше</span>
 						</label>
 					</div>
@@ -489,11 +489,13 @@
 						<span class="quiz-send__descr">
 							Получите подборку подходящих для вас моделей на почту
 						</span>
-						<input name="name" placeholder="Ваше имя" type="text" autocomplete="on" class="quiz-send__input check req">
-						<input name="email" placeholder="E-mail" type="email" autocomplete="on" class="quiz-send__input req email">
+						<input name="name" placeholder="Ваше имя" type="text" autocomplete="on" class="quiz-send__input check">
+						<input name="email" placeholder="E-mail" type="text" autocomplete="on" class="quiz-send__input email">
 						<button class="quiz-send__btn btn btn-reset" data-send>Получить</button>
-						<div class="quiz-send__phone"></div>
-						<div class="quiz-send__ok"></div>
+						<div class="quiz-block__message form-message">Пожалуйста, выберите размер!</div>
+						<div class="quiz-send__phone">
+							<div class="quiz-send__ok"></div>
+						</div>
 					</div>
 				</div>
 			</form>

@@ -85,7 +85,7 @@
 		font-weight: 400;
 		font-size: 16px;
 		color: $color-accent;
-		transition: opacity all 0.3s ease 0s, visibility all 0.3s ease 0s;
+		transition: all 0.3s ease 0s;
 		&.active {
 			opacity: 1;
 			visibility: visible;
@@ -232,6 +232,7 @@
 		}
 	
 		&__btn {
+			display: inline-block;
 			margin-top: 20px;
 			min-width: 220px;
 		}
@@ -247,16 +248,17 @@
 	
 		&__ok {
 			position: absolute;
-			top: -15px;
-			right: -184px;
-			width: 205px;
-			height: 411px;
+			top: -2px;
+			right: 14px;
+			width: 86%;
+			height: 100%;
 			background: url('../img/ok.webp') center center/contain no-repeat;
-			transform: scale(0.92);
 			opacity: 0;
+			visibility: hidden;
 			transition: all 0.3s ease 0s;
-			.active {
+			&.active {
 				opacity: 1;
+				visibility: visible;
 			}
 		}
 	}
