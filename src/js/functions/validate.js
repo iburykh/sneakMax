@@ -56,37 +56,51 @@ function formAddError(item) {
 	item.classList.add('error');
 
 	//! Оставить эту часть, если в html добавлены блоки с сообщением об ошибке (.form-error)
-	//* если ошибка для каждого input
+	//* если разный текст ошибки для каждого input
 	// let imputError = item.nextElementSibling;
 	// if (imputError) {
 	// 	if (imputError.classList.contains('imput-message')) {
 	// 		imputError.classList.add('active');
 	// 	}
 	// }
-	//* если ошибка для всей формы
-	let formError = item.closest('.quiz-block').querySelector('.form-message');
-	if (formError) {
-		formError.classList.add('active');
+	//* если ошибка для всей формы (или блока квиза):
+
+	//! Оставить эту часть если на сайте есть квиз
+	if (item.closest('.quiz-form')) {
+		let quizError = item.closest('.quiz-block').querySelector('.form-message');
+		if (quizError) {
+			quizError.classList.add('active');
+		}
+	} else {
+		let formError = item.parentElement.querySelector('.form-error');
+		if (formError) {
+			formError.classList.add('active');
+		}
 	}
+
+	//! Оставить эту часть если на сайте нет квиза (только формы)
+	// let formError = item.parentElement.querySelector('.form-error');
+	// if (formError) {
+	// 	formError.classList.add('active');
+	// }
 }
 
-function formRemoveError(selector) {
-	if (selector.length > 0) {
-		for (let index = 0; index < selector.length; index++) {
-			const input = selector[index];
+function formRemoveError(form) {
+	let inputs = form.querySelectorAll('input, textarea');
+	if (inputs.length > 0) {
+		for (let index = 0; index < inputs.length; index++) {
+			const input = inputs[index];
 			input.parentElement.classList.remove('error');
 			input.classList.remove('error');
-			//! Оставить эту часть, если в html добавлены блоки с сообщением об ошибке (.form-error)
-			//* если ошибка для каждого input
-			// let imputError = input.nextElementSibling;
-			// if (imputError) {
-			// 	imputError.classList.remove('active');
-			// }
-			//* если есть ошибка для всей формы
-			let formError = input.closest('.quiz-block').querySelector('.form-message');
-			if (formError) {
-				formError.classList.remove('active');
-			}
+		}
+	}
+	
+	//! Оставить эту часть, если в html добавлены блоки с сообщением об ошибке (.form-error)
+	let formError = form.querySelectorAll('.form-message');
+	if (formError.length > 0) {
+		for (let index = 0; index < formError.length; index++) {
+			const error = formError[index];
+			error.classList.remove('active');
 		}
 	}
 }

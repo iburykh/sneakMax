@@ -1,44 +1,81 @@
-<?php 
+<?php
+	use PHPMailer\PHPMailer\PHPMailer;
+	use PHPMailer\PHPMailer\Exception;
+	// use PHPMailer\PHPMailer\SMTP; // если используются настройки SMTP
 
-$name = $_POST['name'];
-$email = $_POST['email'];
+	require 'phpmailer/src/Exception.php';
+	require 'phpmailer/src/PHPMailer.php';
+	// require 'phpmailer/src/SMTP.php'; // если используются настройки SMTP
+	// Настройки PHPMailer
+	$mail = new PHPMailer(true);
+	$mail->CharSet = 'UTF-8';
+	$mail->setLanguage('ru', 'phpmailer/language/');
+	$mail->IsHTML(true);
 
-require_once('phpmailer/PHPMailerAutoload.php');
-$mail = new PHPMailer;
-$mail->CharSet = 'utf-8';
+	// Настройки SMTP (если не используется почтовый сервер хостинга)
+	// Эту часть не используем для OpenServer (там свои настройки smtp)
 
-// $mail->SMTPDebug = 3;                               // Enable verbose debug output
+    // $mail->isSMTP();                                            
+    // $mail->Host       = 'smtp.mail.ru'; // SMTP сервера вашей почты
+    // $mail->SMTPAuth   = true;                                   
+    // $mail->Username   = 'diva84@mail.ru'; // Логин на почте
+    // $mail->Password   = 'mHemYMbRarAdexagrpZZ'; // Пароль на почте
+    // $mail->SMTPSecure = 'TLS'; 	           						
+    // $mail->Port       = 587;   
 
-//Эту часть не используем для OpenServer (там свои настройки smtp)
+	// Адрес самой почты и имя отправителя (!обязательно указывать почту как в настройках SMTP!)
+	$mail->setFrom('iburih@gmail.com', 'Письмо');
+	// Получатель письма
+	$mail->addAddress('diva84@mail.ru');
+	// $mail->addAddress('iburih@gmail.com'); // Ещё один, если нужен
+	//Тема письма
+	$mail->Subject = 'Квиз"';
 
-//$mail->isSMTP();                                      // Set mailer to use SMTP
-//$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-//$mail->SMTPAuth = true;                               // Enable SMTP authentication
-//$mail->Username = '';                 // Наш логин
-//$mail->Password = '';                           // Наш пароль от ящика
-//$mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-//$mail->Port = 465;                                    // TCP port to connect to
- //$mail->setFrom('', 'Pulse');   // От кого письмо 
+	//* ======= Формирование самого письма ==========
 
-$mail->addAddress('');     // Add a recipient
-//$mail->addAddress('ellen@example.com');               // Name is optional
-//$mail->addReplyTo('info@example.com', 'Information');
-//$mail->addCC('cc@example.com');
-//$mail->addBCC('bcc@example.com');
-//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-$mail->isHTML(true);                                  // Set email format to HTML
+	//* Переменные, которые отправляет пользователь (можно вставлять в тело письма)
+	// $name = $_POST['name'];
+	// $email = $_POST['email'];
+	// $text = $_POST['text'];
+	// $file = $_FILES['myfile'];
 
-$mail->Subject = 'Данные';
-$mail->Body    = '
-		Пользователь оставил данные <br> 
-	Имя: ' . $name . ' <br>
-	E-mail: ' . $email . '';
+	//*Тело письма в виде таблицы
+	foreach ( $_POST as $key => $value ) {
+		if ( $value != "") {
+			$message .= "
+			" . ( ($c = !$c) ? '<tr>':'<tr style="background-color: #f8f8f8;">' ) . "
+				<td style='padding: 10px; border: #e9e9e9 1px solid;'><b>$key</b></td>
+				<td style='padding: 10px; border: #e9e9e9 1px solid;'>$value</td>
+			</tr>
+			";
+		}
+	}
+	$message = "<table style='width: 100%;'>$message</table>";
 
-if(!$mail->send()) {
-    return false;
-} else {
-    return true;
-}
+	$mail->Body = $message;
 
+	//*Тело письма в виде текста
+	// $mail->Body    = '
+	// 	Пользователь оставил данные <br> 
+	// Имя: ' . $name . ' <br>
+	// Номер телефона: ' . $phone . '<br>
+	// E-mail: ' . $email . '';
+
+	//Отправляем
+	if(!$mail->send()) {
+		return false;
+	} else {
+		return true;
+	}
+
+	// if (!$mail->send()) {
+	// 	$message = 'Ошибка';
+	// } else {
+	// 	$message = 'Данные отправлены!';
+	// }
+
+	// $response = ['message' => $message];
+
+	// header('Content-type: application/json');
+	// echo json_encode($response);
 ?>

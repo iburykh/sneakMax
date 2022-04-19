@@ -1,12 +1,8 @@
-//* В атрибуте name инпута указать имя для значения вопроса (напр. size: 37 - где size - имя)
-//* not-valid - класс для инпутов, которые не надо валидировать
-
 const quizForm = document.querySelector('.quiz-form');
 const inputs = quizForm.querySelectorAll('input');
 const quizBlocks = quizForm.querySelectorAll('.quiz-block');
 let textareaText = null;
-let quizTmp = {};
-let quizReply = [];
+let quizReply  = {};
 let blockIndex = 0;
 
 const clearInputs = () => {
@@ -51,11 +47,13 @@ quizForm.addEventListener('click', (e) => {
 	nextBtn.forEach(btn => {
 		if (target == btn) {
 			e.preventDefault();
-			nextQuestion(block);	
+			addToSend(block, quizReply);
+			nextQuestion(block);
 		}
 	});
 	if (target == document.querySelector('[data-send]')) {
 		e.preventDefault();
+		addToSend(block, quizReply);
 		send(block);
 	}
 });
@@ -70,8 +68,7 @@ function nextQuestion(form) {
 function send(form) {
 	let valid = validInput(form);
 	if (valid === 0 && validCheck(form)) {
-		let elements = form.querySelectorAll('input');
-		formRemoveError(elements);
+		formRemoveError(quizForm);
 
 		//* ======== Сообщение об отправке ============
 		let ok = form.querySelector('.quiz-send__ok');
@@ -82,19 +79,11 @@ function send(form) {
 		}
 
 		//*========= FormData (сама собирает все из формы) ===============
-		const quizFormData = new FormData(quizForm);
+		const quizFormData = new FormData();
+		for (let key in quizReply) {
+			quizFormData.append(key, quizReply[key]);
+		}
 		// formData.append('image', formImage.files[0]);
-		//Добавить данные к отправке из других окон (не формы)
-		// if (item.getAttribute('data-calc') === "end") { 
-		// 	let val = costBlock.innerHTML;
-		// 	let obj = {
-		// 		cost: val
-		// 	};
-		// 	console.log(obj);
-		// 	for (let key in obj) {
-		// 		formData.append(key, obj[key]);
-		// 	}
-		// }
 		//* Проверка формы
 		// for(var pair of quizFormData.entries()) {
 		// 	console.log(pair[0]+ ': '+ pair[1]);
@@ -106,35 +95,67 @@ function send(form) {
 				method: "POST",
 				body: data
 			});	
-			return await response.json(); // res.text() - для проверки на сервере) или res.json() - для отправки на почту;
-		};
-		postData('../sendmail.php', quizFormData)
-		// postData('../server.php', quizFormData) //! убрать (это для проверки на сервере)
-		.then(response => {
-			console.log(response); //! убрать (это для проверки на сервере)
-			// let result = postData('../sendmail.php', quizFormData);
-			// console.log(result.message)
-			// alert(result.message);
-			if (textMessage) {
-				textMessage.textContent = 'Ok!';
-				textMessage.classList.add('active');
-			}
-			ok.classList.add('active');
-		})
-		.catch(() => {
-			if (textMessage) {
-				textMessage.textContent = 'Что-то пошло не так...';
-				textMessage.classList.add('active');
-			}
-		})
-		.finally(() => {
-			clearInputs(inputs);
-			setTimeout(() => {
+			if (response.ok) {
+
+				// let result = await response.json(); // json() - для вывода сообщения;
+				// alert(result.message);
+
+				// let result = await response.text(); // text() - для проверки на сервере, подключить server.php)
+				// console.log(result); // это для проверки на сервере
+
 				if (textMessage) {
-					textMessage.classList.remove('active');
+					textMessage.textContent = 'Ok!';
+					textMessage.classList.add('active');
 				}
-				ok.classList.remove('active');
-			}, 5000);
-		});
+				ok.classList.add('active');
+				clearInputs(inputs);
+				setTimeout(() => {
+					if (textMessage) {
+						textMessage.classList.remove('active');
+					}
+					ok.classList.remove('active');
+				}, 5000);
+			} else {
+				// alert("Ошибка");
+				if (textMessage) {
+					textMessage.textContent = 'Что-то пошло не так...';
+					textMessage.classList.add('active');
+				}
+				setTimeout(() => {
+					if (textMessage) {
+						textMessage.classList.remove('active');
+					}
+				}, 5000);
+			}
+		};
+		postData('../sendmail.php', quizFormData);
+		// postData('../server.php', quizFormData) //! убрать (это для проверки на сервере)
+		
+	}
+}
+
+function addToSend(form, obj) {
+	let valueString = '';
+	let inputs = form.querySelectorAll('input');
+	let textarea = form.querySelectorAll('textarea');
+	if (inputs.length > 0) {
+		for (let i = 0; i < inputs.length; i++) {
+			let field = inputs[i];
+			if (field.type != 'checkbox' && field.type != 'radio' && field.value) {
+				obj[field.name] = field.value;
+			} else if (field.type == 'radio' && field.checked) {
+				obj[field.name] = field.value;
+			} else if (field.type == 'checkbox' && field.checked) {
+				valueString += field.value + ',';		
+				obj[field.name] = valueString;
+			}
+		}
+	} else if (textarea.length > 0) {
+		for (let i = 0; i < textarea.length; i++) {
+			let text = textarea[i];
+			if (text.value) {
+				obj[text.name] = text.value;	
+			}
+		}
 	}
 }
