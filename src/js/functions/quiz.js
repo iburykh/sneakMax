@@ -1,6 +1,7 @@
 const quizForm = document.querySelector('.quiz-form');
 const inputs = quizForm.querySelectorAll('input');
 const quizBlocks = quizForm.querySelectorAll('.quiz-block');
+
 let textareaText = null;
 let quizReply  = {};
 let blockIndex = 0;

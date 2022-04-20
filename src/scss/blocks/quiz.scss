@@ -5,7 +5,24 @@
 	padding: 40px 100px;
 	background-color: $color-bg;
 	border-radius: 4px;
+	@media (max-width: 992px) {
+		padding: 30px 20px;
+	}
+	@media (max-width: 768px) {
+		padding: 30px 20px 10px 20px;
+	}
+	@media (max-width: 576px) {
+		padding: 20px 10px 10px 10px;
+	}
+	&_text {
+		@media (max-width: 768px) {
+			padding: 30px 20px;
+		}
+		@media (max-width: 576px) {
+			padding: 20px 10px;
+		}
 
+	}
 	&__text {
 		display: inline-block;
 		width: 100%;
@@ -13,19 +30,41 @@
 		padding-bottom: 10px;
 		color: $color-light-text;
 		border-bottom: solid 1px $color-light-text;
+		@media (max-width: 992px) {
+			font-size: 14px;
+		}
+		@media (max-width: 768px) {
+			text-align: center;
+		}
+	}
+	&__title {
+		@media (max-width: 768px) {
+			text-align: center;
+		}
+		@media (max-width: 576px) {
+			font-size: 25px;
+		}
 	}
 
 	&__subtitle {
 		margin-top: 20px;
+		@media (max-width: 768px) {
+			font-size: 23px;
+			text-align: center;
+		}
+		@media (max-width: 576px) {
+			font-size: 18px;
+		}
 	}
 
 	&__wrapper {
 		margin-top: 20px;
 		padding-bottom: 40px;
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
 		align-items: center;
 		flex-wrap: wrap;
+		column-gap: 70px;
 		row-gap: 20px;
 	}
 
@@ -50,6 +89,14 @@
 		justify-content: space-between;
 		align-items: center;
 		border-top: solid 1px $color-light-text;
+		@media (max-width: 768px) {
+			flex-wrap: wrap;
+			gap: 10px;
+		}
+		@media (max-width: 576px) {
+			flex-direction: column;
+			justify-content: center;
+		}
 	}
 
 	&__number {
@@ -84,6 +131,13 @@
 			opacity: 1;
 			visibility: visible;
 		}
+		@media (max-width: 768px) {
+			flex: 1 1 100%;
+			order: 3;
+		}
+		@media (max-width: 577px) {
+			text-align: center;
+		}
 	}
 	&__checkboxes {
 		margin-top: 30px;
@@ -91,6 +145,17 @@
 		justify-content: flex-start;
 		align-items: center;
 		gap: 70px;
+		@media (max-width: 1200px) {
+			gap: 50px;
+		}
+		@media (max-width: 992px) {
+			gap: 35px;
+		}
+		@media (max-width: 768px) {
+			flex-wrap: wrap;
+			column-gap: 30px;
+			row-gap: 15px;
+		}
 	}
 	&__image {
 		margin-top: 22px;
@@ -119,6 +184,15 @@
 		background-color: $color-white;
 		&::placeholder {
 			color: $color-cameo;
+		}
+		@media (max-width: 768px) {
+			display: block;
+			width: 430px;
+			margin: 20px auto 112px auto;
+		}
+		@media (max-width: 577px) {
+			width: 100%;
+			margin: 20px auto 60px auto;
 		}
 	}
 
@@ -175,6 +249,16 @@
 }
 .quiz-fin {
 	padding: 80px 100px 57px 100px;
+	&__title {
+		font-weight: 700;
+		font-size: 30px;
+		@media (max-width: 768px) {
+			text-align: center;
+		}
+		@media (max-width: 576px) {
+			font-size: 25px;
+		}
+	}
 	&__text {
 		display: inline-block;
 		width: 100%;
@@ -183,6 +267,15 @@
 		font-size: 18px;
 		color: $color-cameo;
 		border-bottom: solid 1px  $color-cameo;
+		@media (max-width: 992px) {
+			font-size: 16px;
+		}
+		@media (max-width: 768px) {
+			text-align: center;
+		}
+		@media (max-width: 576px) {
+			font-size: 14px;
+		}
 	}
 
 	.quiz-send {
@@ -192,10 +285,25 @@
 		background-color: $color-cameo;
 		border-radius: 4px;
 		width: 65%;
+		@media (max-width: 992px) {
+			width: 70%;
+		}
+		@media (max-width: 768px) {
+			width: 100%;
+		}
+		@media (max-width: 576px) {
+			padding: 20px 10px;
+		}
 		&__title {
 			font-weight: 700;
 			font-size: 36px;
 			color: $color-white;
+			@media (max-width: 768px) {
+				text-align: center;
+			}
+			@media (max-width: 576px) {
+				font-size: 25px;
+			}
 		}
 		&__descr {
 			display: inline-block;
@@ -204,6 +312,12 @@
 			font-size: 18px;
 			color: $color-white;
 			margin-bottom: 14px;
+			@media (max-width: 768px) {
+				text-align: center;
+			}
+			@media (max-width: 576px) {
+				font-size: 14px;
+			}
 		}
 		&__input {
 			display: block;
@@ -219,12 +333,22 @@
 			&::placeholder {
 				color: $color-gray;
 			}
+			@media (max-width: 768px) {
+				width: 100%;
+			}
 		}
 	
 		&__btn {
 			display: inline-block;
 			margin-top: 20px;
 			min-width: 220px;
+			@media (max-width: 768px) {
+				display: block;
+				margin: 20px auto 0px auto;
+			}
+		}
+		.quiz-block__message {
+			margin-top: 10px;
 		}
 	
 		&__phone {
@@ -234,6 +358,13 @@
 			width: 205px;
 			height: 411px;
 			background: url('../img/iPhone.webp') center center/cover no-repeat;
+			@media (max-width: 1200px) {
+				top: 50%;
+				transform: translateY(-50%);
+			}
+			@media (max-width: 768px) {
+				display: none;
+			}
 		}
 	
 		&__ok {

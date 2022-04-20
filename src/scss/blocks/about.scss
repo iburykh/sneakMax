@@ -9,6 +9,10 @@
 		top: 0;
 		width: 550px;
 		height: 424px;
+		@media (max-width: 576px) {
+			width: 300px;
+			height: 231px;
+		}
 	}
 
 	&__container {
@@ -17,16 +21,33 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		@media (max-width: 992px) {
+			min-height: 450px;
+		}
 	}
 
 	&__title {
 		color: $color-white;
+		@media (max-width: 992px) {
+			text-align: center;
+		}
 		
 	}
 
 	&__descr {
 		margin-top: 20px;
 		width: 38%;
+		z-index: 2;
+		@media (max-width: 1200px) {
+			width: 35%;
+		}
+		@media (max-width: 992px) {
+			width: 70%;
+			margin: 20px auto 0px auto;
+		}
+		@media (max-width: 576px) {
+			width: 90%;
+		}
 	}
 
 	&__quote {
@@ -37,6 +58,12 @@
 		&::before,
 		&::after {
 		  display: none;
+		}
+		@media (max-width: 1200px) {
+			width: 90%;
+		}
+		@media (max-width: 992px) {
+			width: 100%;
 		}
 	}
 
@@ -75,6 +102,9 @@
 			top: 0;
 			left: 0;
 			object-fit: cover;
+		}
+		@media (max-width: 992px) {
+			display: none;
 		}
 	}
 }
