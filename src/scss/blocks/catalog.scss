@@ -318,7 +318,7 @@
 		}
 	}
 }
-.catalog-sises {
+.catalog-sizes {
 	margin-top: 20px;
 	width: 100%;
 	border-collapse: collapse;
@@ -331,5 +331,11 @@
 		border: solid 1px $color-cameo;
 		text-align: center;
 		padding: 17px 5px;
+		cursor: pointer;
+		@media (hover: hover) and (pointer: fine) {
+			&:hover {
+				background-color: $color-cameo;
+			}
+		}
 	}
 }

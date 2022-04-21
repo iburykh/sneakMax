@@ -90,7 +90,7 @@
 						</div>
 					</div>
 					<span class="catalog__caption">Размер</span>
-					<table class="catalog-sises">
+					<table class="catalog-sizes">
 						<caption>Таблица размеров</caption>
 						<tr>
 							<td>35</td>
@@ -583,12 +583,44 @@
 			</ul>
 		</div>
 	</section>
+	<section class="contacts">
+		<div class="contacts__container container">
+			<div class="contacts__wrapper">
+				<div class="contacts__info">
+					<h2 class="contacts__title title">Контакты</h2>
+					<h3 class="contacts__subtitle">Главный офис</h3>
+					<span class="tooltip">
+						<button class="tooltip__btn btn-reset" aria-describedby="office">
+							<svg><use xlink:href="img/sprite.svg#tooltip"></use></svg>
+						</button>
+						<span class="tooltip__txt" role="tooltip" id="office">
+							<span class="visually-hidden">Тултип: </span>
+							Адрес и телефон для корреспонденции, инвесторов. Вопросы о доставке, качестве обслуживания и товара
+							просьба задавать в отдел продаж
+						</span>
+					</span>
+					<a href="tel:+78007898989" class="contacts__phone">+7 800 789 89 89</a>
+					<address class="contacts__address">г. Санкт-Петербург, Комсомольская, 43 к1</address>
+					<h3 class="contacts__subtitle">Главный офис</h3>
+					<a href="tel:+78007898989" class="contacts__phone">+7 800 789 89 89</a>
+					<address class="contacts__address">г. Санкт-Петербург, Комсомольская, 43 к1</address>
+					<div class="social">
+						<a href="#" class="social__link social__link_vk" aria-label="Мы во Вконтакте"></a>
+						<a href="#" class="social__link social__link_tg" aria-label="Мы в Телеграм"></a>
+					</div>
+				</div>
+				<div class="contacts__map" id="map"></div>
+			</div>
+		</div>
+	</section>
 
 	<!-- <script async src="resources/webp.min.js"></script> -->
 	<!-- <script async src="resources/focus-visible.min.js"></script> -->
 	<!-- <script async src="resources/zenscroll.min.js"></script> -->
 	<script defer src="js/libs.js"></script>
+	<script defer src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 	<script defer src="js/main.js"></script>
+
 </body>
 
 </html>

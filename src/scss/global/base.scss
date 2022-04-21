@@ -7,7 +7,7 @@
 body {
     font-family: 'Intro', sans-serif;
     color: #000;
-    background-color: #fff;
+    background-color: $color-white;
     font-weight: 400;
     font-size: 16px;
     line-height: 1;
@@ -19,6 +19,8 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
 	margin: 0;
+    font-weight: inherit;
+	font-size: inherit;
 }
 
 ul, ol, li {
@@ -68,13 +70,24 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    clip: rect(0 0 0 0);
+}
+
 .js-focus-visible :focus:not(.focus-visible) {
     outline: none;
 }
 
-// a:focus,
-// button:focus,
-// select:focus {
-//     outline: 2px dotted #0089cd;
-//     outline-offset: 3px;
-// }
+a:focus,
+button:focus,
+select:focus {
+    outline: 2px solid $color-dark-accent;
+    outline-offset: 1px;
+}

@@ -1,0 +1,151 @@
+.contacts {
+	padding: 60px 0px;
+	background-color: $bg;
+	&__container {
+	}
+
+	&__wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+	}
+
+	&__info {
+		flex: 0 1 50%;
+	}
+
+	&__title {
+		margin-bottom: 20px;
+	}
+
+	&__subtitle {
+		display: inline-block;
+		margin-top: 40px;
+		font-size: 14px;
+		text-transform: uppercase;
+		color: $color-gray;
+	}
+
+	&__phone {
+		display: block;
+		font-weight: 700;
+		margin-top: 40px;
+		font-size: 30px;
+		@media (hover: hover) and (pointer: fine) {
+			&:hover {
+				color: $color-dark-accent;
+			}
+		}
+	}
+
+	&__address {
+		margin-top: 15px;
+		font-style: normal;
+		font-size: 18px;
+	}
+
+	&__map {
+		width: 680px;
+		height: 497px;
+		background-image: url("../img/loading_1.gif");
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: 60px;
+		[class*="copyrights-pane"] {
+			display: none !important;
+		}
+	}
+}
+
+.tooltip {
+	position: relative;
+	margin-left: 10px;
+	&__btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 20px;
+		height: 20px;
+		border-radius: 100%;
+		background-color: $color-white;
+		box-shadow: 2px 4px 10px rgba(0, 13, 84, 0.2);
+		svg {
+			width: 6px;
+			height: 10px;
+		}
+		@media (hover: hover) and (pointer: fine) {
+			&:hover {
+				+ .tooltip__txt {
+					opacity: 1;
+					visibility: visible;
+					transform: translateY(0);
+				}
+			}
+		}
+		&:focus {
+			+ .tooltip__txt {
+				opacity: 1;
+				visibility: visible;
+				transform: translateY(0);
+			}
+		}
+	}
+
+	&__txt {
+		position: absolute;
+		left: -10px;
+		bottom: calc(100% + 14px);
+		padding: 10px 20px;
+		width: max-content;
+		max-width: 426px;
+		background-color: $color-white;
+		box-shadow: 4px 8px 20px rgba(0, 13, 84, 0.2);
+		z-index: 3;
+		font-size: 14px;
+		border-radius: 4px;
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(10px);
+		transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+		&::after {
+			content:'';
+			position: absolute;
+			left: 10px;
+			bottom: -8px;
+			border-style: solid;
+			border-width: 11px 9px 0 9px;
+			border-color: $color-white transparent transparent transparent;
+			width: 0;
+			height: 0;
+		}
+	}
+}
+
+.social {
+	margin-top: 40px;
+	display: flex;
+	gap: 20px;
+	&__link {
+		display: block;
+		width: 44px;
+		height: 44px;
+		background-color: #0E5A4C;
+		border-radius: 100%;
+		background-position: center;
+		background-repeat: no-repeat;
+		@media (hover: hover) and (pointer: fine) {
+			&:hover {
+				box-shadow: 0px 0px 5px #0E5A4C;
+			}
+		}
+		&_vk {
+			background-size: 24px;
+			background-image: url("../img/vk.svg");
+		}
+
+		&_tg {
+			background-size: 24px;
+			background-image: url("../img/telegram.svg");
+		}
+	}
+}
