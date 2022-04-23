@@ -1,30 +1,10 @@
 const quizForm = document.querySelector('.quiz-form');
-const inputs = quizForm.querySelectorAll('input');
+const quizInputs = quizForm.querySelectorAll('input');
 const quizBlocks = quizForm.querySelectorAll('.quiz-block');
 
 let textareaText = null;
 let quizReply  = {};
 let blockIndex = 0;
-
-const clearInputs = () => {
-	inputs.forEach(item => {
-		item.value = '';
-	});
-
-	//* если есть загрузка файла (в атрибут добавить file)
-	// if (file) {
-	// 	file.textContent = "Файл не выбран";
-	// }
-
-	//* если есть checkbox
-	let checkboxes = quizForm.querySelectorAll('.custom-checkbox__input');
-	if (checkboxes.length > 0) {
-		for (let index = 0; index < checkboxes.length; index++) {
-			const checkbox = checkboxes[index];
-			checkbox.checked = false;
-		}
-	}
-};
 
 // функция показа только первого блока квиза
 showBlocks(blockIndex);
@@ -35,7 +15,7 @@ function showBlocks() {
 }
 
 // запись названия чекбокса в value инпута чекбокса
-inputs.forEach(input => {
+quizInputs.forEach(input => {
 	if (input.type == 'checkbox' || input.type == 'radio') {
 		input.value = input.nextElementSibling.textContent;
 	}
@@ -73,25 +53,25 @@ function send(form) {
 
 		//* ======== Сообщение об отправке ============
 		let ok = form.querySelector('.quiz-send__ok');
-		let textMessage = form.querySelector('.form-message');
+		let textMessage = form.querySelector('.quiz-message');
 		if (textMessage) {
 			textMessage.textContent = 'Загрузка...';
 			textMessage.classList.add('active');
 		}
 
-		//*========= FormData (сама собирает все из формы) ===============
+		//*========= FormData ===============
 		const quizFormData = new FormData();
 		for (let key in quizReply) {
 			quizFormData.append(key, quizReply[key]);
 		}
 		// formData.append('image', formImage.files[0]);
-		//* Проверка формы
+		//* Проверка FormData
 		// for(var pair of quizFormData.entries()) {
 		// 	console.log(pair[0]+ ': '+ pair[1]);
 		// }
 
-		//*========= Отправка формы ===============
-		const postData = async (url, data) => {
+		//*========= Отправка данных ===============
+		const quizData = async (url, data) => {
 			let response = await fetch(url, {
 				method: "POST",
 				body: data
@@ -109,7 +89,7 @@ function send(form) {
 					textMessage.classList.add('active');
 				}
 				ok.classList.add('active');
-				clearInputs(inputs);
+				clearInputs(quizInputs);
 				setTimeout(() => {
 					if (textMessage) {
 						textMessage.classList.remove('active');
@@ -117,7 +97,7 @@ function send(form) {
 					ok.classList.remove('active');
 				}, 5000);
 			} else {
-				// alert("Ошибка");
+				alert("Ошибка HTTP: " + response.status);
 				if (textMessage) {
 					textMessage.textContent = 'Что-то пошло не так...';
 					textMessage.classList.add('active');
@@ -129,9 +109,9 @@ function send(form) {
 				}, 5000);
 			}
 		};
-		postData('../sendmail.php', quizFormData);
-		// postData('../server.php', quizFormData) //! убрать (это для проверки на сервере)
-		
+		quizData('../sendmail.php', quizFormData);
+		// quizData('../server.php', quizFormData) //! убрать (это для проверки на сервере)
+
 	}
 }
 

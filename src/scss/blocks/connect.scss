@@ -1,0 +1,53 @@
+.connect {
+	padding: 4% 0;
+}
+.form {
+	width: 50%;
+	padding: 40px 20px;
+	background-color: $main-color;
+	text-align: center;
+	border-radius: 4px;
+	margin: 0px auto;
+	@media (max-width: 992px) {
+		width: 60%;
+	}
+	@media (max-width: 768px) {
+		width: 80%;
+	}
+	@media (max-width: 576px) {
+		width: 100%;
+	}
+	&__title {
+		color: $color-white;
+	}
+
+	&__text {
+		display: block;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		color: $color-white;
+	}
+
+	&__input {
+		padding: 20px;
+		margin-top: 10px;
+		display: block;
+		width: 100%;
+		height: 60px;
+		border: none;
+		border-radius: 4px;
+		background-color: $color-white;
+		color: $color-text;
+		&::placeholder {
+			color: $color-light-text;
+		}
+		&.error {
+			border: solid 1px $color-dark-accent;
+		}
+	}
+
+	&__submit {
+		margin-top: 10px;
+		width: 100%;
+	}
+}

@@ -340,7 +340,7 @@
 	</section>
 	<section class="quiz">
 		<div class="quiz__container container">
-			<form action="#" class="quiz-form">
+			<div class="quiz-form">
 				<div class="quiz-block">
 					<h2 class="quiz-block__title title">
 						Мы подберем идеальную пару для вас
@@ -425,7 +425,7 @@
 					</div>
 					<div class="quiz-block__footer">
 						<span class="quiz-block__number">1 из 3</span>
-						<div class="quiz-block__message form-message">Пожалуйста, выберите тип кроссовок!</div>
+						<div class="quiz-block__message quiz-message">Пожалуйста, выберите тип кроссовок!</div>
 						<button class="quiz-block__btn btn-reset" data-next>Следующий шаг</button>
 					</div>
 				</div>
@@ -467,7 +467,7 @@
 					</div>
 					<div class="quiz-block__footer">
 						<span class="quiz-block__number">2 из 3</span>
-						<div class="quiz-block__message form-message">Пожалуйста, выберите размер!</div>
+						<div class="quiz-block__message quiz-message">Пожалуйста, выберите размер!</div>
 						<button class=" quiz-block__btn btn-reset" data-next>Следующий шаг</button>
 					</div>
 				</div>
@@ -500,13 +500,13 @@
 						<input name="name" placeholder="Ваше имя" type="text" autocomplete="on" class="quiz-send__input check">
 						<input name="email" placeholder="E-mail" type="text" autocomplete="on" class="quiz-send__input email">
 						<button class="quiz-send__btn btn btn-reset" data-send>Получить</button>
-						<div class="quiz-block__message form-message">Пожалуйста, выберите размер!</div>
+						<div class="quiz-block__message quiz-message">Пожалуйста, заполните все поля</div>
 						<div class="quiz-send__phone">
 							<div class="quiz-send__ok"></div>
 						</div>
 					</div>
 				</div>
-			</form>
+			</div>
 		</div>
 	</section>
 	<section class="team">
@@ -633,9 +633,38 @@
 			</div>
 		</div>
 	</section>
+	<section class="connect">
+		<div class="connect__container container">
+			<form action="#" class="form" enctype="multipart/form-data">
+				<h2 class="form__title title">Есть вопросы?</h2>
+				<span class="form__text">
+					Заполните форму и наш менеджер свяжется с вами
+				</span>
+				<input name="name" placeholder="Ваше имя" type="text" autocomplete="on" class="form__input">
+				<input name="phone" placeholder="Номер телефона" type="text" autocomplete="on" class="form__input tel">
+				<button class="form__submit btn btn-reset">Отправить</button>
+			</form>
+		</div>
+	</section>
+	<footer class="footer">
+		<div class="footer__container container">
+			<div class="footer__wrapper">
+				<a class="footer__logo" aria-label="логотип">SneakMax</a>
+				<nav class="footer-menu">
+					<ul class="footer-menu__list">
+						<li class="footer-menu__item"><a href="#" class="footer-menu__link">Каталог</a></li>
+						<li class="footer-menu__item"><a href="#" class="footer-menu__link">О нас</a></li>
+						<li class="footer-menu__item"><a href="#" class="footer-menu__link">Подбор товара</a></li>
+						<li class="footer-menu__item"><a href="#" class="footer-menu__link">Наша команда</a></li>
+						<li class="footer-menu__item"><a href="#" class="footer-menu__link">Доставка и оплата</a></li>
+						<li class="footer-menu__item"><a href="#" class="footer-menu__link">Контакты</a></li>
+						<li class="footer-menu__item"><a href="#" class="footer-menu__link">Корзина</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</footer>
 
-	<!-- <script async src="resources/webp.min.js"></script> -->
-	<!-- <script async src="resources/focus-visible.min.js"></script> -->
 	<!-- <script async src="resources/zenscroll.min.js"></script> -->
 	<script defer src="js/libs.js"></script>
 	<script defer src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>

@@ -67,7 +67,7 @@ function formAddError(item) {
 
 	//! Оставить эту часть если на сайте есть квиз
 	if (item.closest('.quiz-form')) {
-		let quizError = item.closest('.quiz-block').querySelector('.form-message');
+		let quizError = item.closest('.quiz-block').querySelector('.quiz-message');
 		if (quizError) {
 			quizError.classList.add('active');
 		}
@@ -89,9 +89,11 @@ function formRemoveError(form) {
 	let inputs = form.querySelectorAll('input, textarea');
 	if (inputs.length > 0) {
 		for (let index = 0; index < inputs.length; index++) {
-			const input = inputs[index];
-			input.parentElement.classList.remove('error');
-			input.classList.remove('error');
+			let input = inputs[index];
+			if (!input.classList.contains('not-valid')) {
+				input.parentElement.classList.remove('error');
+				input.classList.remove('error');
+			}
 		}
 	}
 	
