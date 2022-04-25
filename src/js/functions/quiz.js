@@ -81,8 +81,8 @@ function send(form) {
 				// let result = await response.json(); // json() - для вывода сообщения;
 				// alert(result.message);
 
-				// let result = await response.text(); // text() - для проверки на сервере, подключить server.php)
-				// console.log(result); // это для проверки на сервере
+				let result = await response.text(); // text() - для проверки на сервере, подключить server.php)
+				console.log(result); // это для проверки на сервере
 
 				if (textMessage) {
 					textMessage.textContent = 'Ok!';
@@ -109,8 +109,8 @@ function send(form) {
 				}, 5000);
 			}
 		};
-		quizData('../sendmail.php', quizFormData);
-		// quizData('../server.php', quizFormData) //! убрать (это для проверки на сервере)
+		// quizData('../sendmail.php', quizFormData);
+		quizData('../server.php', quizFormData) //! убрать (это для проверки на сервере)
 
 	}
 }

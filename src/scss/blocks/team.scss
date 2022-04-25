@@ -1,6 +1,6 @@
 .team {
 	position: relative;
-	padding: 60px 0px;
+	padding: 60px 0px 20px 0;
 	background-color: $main-color;
 	&__bg {
 		position: absolute;
@@ -31,8 +31,7 @@
 		align-items:stretch;
 		justify-content: center;
 		flex-wrap: wrap;
-		column-gap: 20px;
-		row-gap: 40px;
+		margin: 40px -10px 0 -10px;
 		z-index: 5;
 		@media (max-width: 576px) {
 			padding: 0;
@@ -43,6 +42,7 @@
 .team-item {
 	width: 360px;
 	height: 100%;
+	margin: 0px 10px 40px 10px;
 	@media (max-width: 992px) {
 		width: 280px;
 	}

@@ -162,17 +162,20 @@
 .social {
 	margin-top: 40px;
 	display: flex;
-	gap: 20px;
 	&__link {
 		display: block;
 		width: 44px;
 		height: 44px;
 		background-color: #0E5A4C;
 		border-radius: 100%;
+		margin-right: 20px;
 		background-position: center;
 		background-repeat: no-repeat;
 		transition: all 0.3s ease 0s;
 		will-change: transform;
+		&:last-child {
+			margin-right: 0;
+		}
 		@media (hover: hover) and (pointer: fine) {
 			&:hover {
 				transform: scale(1.1)

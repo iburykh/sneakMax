@@ -12,7 +12,7 @@
 	// $email = $_POST['email'];
 	// $text = $_POST['text'];
 	// $file = $_FILES['myfile'];
-	$file = $_FILES['file']; //*для файлов
+	// $file = $_FILES['file']; //*для файлов
 
 	//* Формирование самого письма
 	$title = "Тема письма";
@@ -48,16 +48,16 @@
 	// $mail->isSMTP();  
 	// $mail->SMTPAuth   = true;                                           
 	// $mail->Host       = 'smtp.mail.ru'; // SMTP сервера вашей почты                   
-	// $mail->Username   = 'diva84@mail.ru'; // Логин на почте
-	// $mail->Password   = 'mHemYMbRarAdexagrpZZ'; // Пароль на почте
+	// $mail->Username   = ''; // Логин на почте
+	// $mail->Password   = ''; // Пароль на почте
 	// $mail->SMTPSecure = 'TLS'; 	           						
 	// $mail->Port       = 587;  
 
 	// Адрес самой почты и имя отправителя (!обязательно указывать почту как в настройках SMTP!)
-	$mail->setFrom('iburih@gmail.com', 'Заявка с вашего сайта');
+	$mail->setFrom('', 'Заявка с вашего сайта');
 	// Получатель письма
-	$mail->addAddress('diva84@mail.ru');
-	// $mail->addAddress('iburih@gmail.com'); // Ещё один, если нужен
+	$mail->addAddress('');
+	// $mail->addAddress(''); // Ещё один, если нужен
 
 	// Прикрипление файлов к письму
 	if (!empty($file['name'][0])) {

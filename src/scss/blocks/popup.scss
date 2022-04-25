@@ -1,0 +1,138 @@
+$transition-time: 0.5s;
+
+// .popup {
+// 	position: fixed;
+// 	top: 0;
+// 	left: 0;
+// 	width: 100%;
+// 	height: 100vh;
+// 	z-index: 100;
+// 	background-color: rgba(0,0,0,.5);
+// 	display: flex;
+// 	flex-direction: column;
+// 	align-items: center;
+// 	justify-content: flex-start;
+// 	outline: none;
+// 	pointer-events: none;
+// 	opacity: 0;
+// 	visibility: hidden;
+// 	transition: opacity $transition-time ease 0s, visibility $transition-time ease 0s;
+// 	&.active {
+// 		pointer-events: auto;
+// 		cursor: pointer;
+// 		visibility: visible;
+// 		opacity: 1;
+// 		overflow-y: scroll; //появляестя полоса прокрутки (использовать, если есть фиксированные блоки)
+// 		// overflow-y: auto; // полоса прокрутки появиться только при необходимости
+// 		-webkit-overflow-scrolling: touch;
+// 		.popup__wrapper {
+// 			opacity: 1;
+// 		}
+// 	}
+// 	&__wrapper {
+// 		position: relative;
+// 		flex-shrink:0;
+// 		margin: auto;
+// 		opacity: 0;
+// 		transition: opacity 0.5s ease 0s;
+// 	}
+// 	&__content {
+// 		padding: 20px;
+// 		width: 500px;
+// 		height: 100px;
+// 		// max-width: 752px;
+// 		margin: 20px 0px;
+// 		background-color: #fff;
+// 		box-shadow: 0px 0px 30px rgba(0,0,0, .8);
+// 		border-radius: 5px;
+// 		cursor: default;
+// 	}
+// 	&__close {
+// 		position: absolute;
+// 		right: 5px;
+// 		top: 28px;
+// 		font-size: 35px;
+// 		width: 19px;
+// 		height: 19px;
+// 		color: #000;
+// 		line-height: 19px;
+// 		// outline: none;
+// 	}
+// }
+
+.popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 100;
+	background-color: rgba(0,0,0,.5);
+	// display: flex;
+	// flex-direction: column;
+	// align-items: center;
+	// justify-content: flex-start;
+	outline: none;
+	pointer-events: none;
+	text-align: center;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity $transition-time ease 0s, visibility $transition-time ease 0s;
+	&::before {
+		content:'';
+		display: inline-block;
+		vertical-align: middle;
+		height: 100%;
+	}
+	&.active {
+		pointer-events: auto;
+		visibility: visible;
+		opacity: 1;
+		overflow-y: scroll; //появляестя полоса прокрутки (использовать, если есть фиксированные блоки)
+		// overflow-y: auto; // полоса прокрутки появиться только при необходимости
+		-webkit-overflow-scrolling: touch;
+		.popup__content {
+			opacity: 1;
+			transform: translateY(0);
+			transition: opacity $transition-time, transform $transition-time;
+		}
+	}
+	// &__wrapper {
+	// 	position: relative;
+	// 	flex-shrink:0;
+	// 	margin: auto;
+	// 	// opacity: 0;
+	// 	vertical-align: middle;
+	// 	transition: opacity 0.5s ease 0s;
+	// }
+	&__content {
+
+		position: relative;
+		vertical-align: middle;
+		padding: 20px;
+		width: 90%;
+		margin: 50px auto;
+		// height: 100px;
+		// max-width: 752px;
+		margin: 20px 0px;
+		background-color: #fff;
+		box-shadow: 0px 0px 30px rgba(0,0,0, .8);
+		border-radius: 5px;
+		display: inline-block;
+		opacity: 0;
+		transform: translateY(-100px);
+		transition: opacity $transition-time, transform $transition-time;
+	}
+	&__close {
+		position: absolute;
+		right: 5px;
+		top: 28px;
+		font-size: 35px;
+		width: 19px;
+		height: 19px;
+		color: #000;
+		line-height: 19px;
+		// outline: none;
+	}
+}
+
