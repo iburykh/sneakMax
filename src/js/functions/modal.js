@@ -6,26 +6,32 @@
 
 //TODO Добавить классы:
 //* data-modal - добавить всем модальным окнам (modal-name) (если их несколько)
-//* tab-last - добавить класс для последнего интерактивного элемента в форме
 //* lock - добавить класс для блоков с position: absolute или fixed (добавится padding)
 //* small-lock - добавить класс для маленьких блоков с position: absolute или fixed (добавится margin)
 
 
-bindModal('.modal-btn', '.modal-name', '.modal-name__close', 500);
+bindModal('.modal-btn', '.modal-prod', '.modal__close', 500);
 
 function bindModal(triggerSelector, modalSelector, closeSelector, speed) {
     const trigger = document.querySelectorAll(triggerSelector),
-            modal = document.querySelector('.overlay'),
+            modal = document.querySelector('.modal-overlay'),
             modalContent = document.querySelector(modalSelector),
             close = document.querySelector(closeSelector),
             windows = document.querySelectorAll('[data-modal]'),
             fixScroll = document.querySelectorAll('.lock'),
             smallFix = document.querySelectorAll('.small-lock'),
-            tabLast = modal.querySelector('.tab-last'),
             speedTime = (speed),
             scroll = calcScroll();
     let modalOpen = false;
     let lastFocus;
+    const focusElements = [
+		'a[href]',
+		'input',
+		'button',
+		'select',
+		'textarea',
+		'[tabindex]'
+	];
 
     trigger.forEach(function(item) {
         item.addEventListener('click', function(e) {
@@ -39,7 +45,7 @@ function bindModal(triggerSelector, modalSelector, closeSelector, speed) {
             });
 
             modal.classList.add('is-open');
-            document.body.classList.add('scroll-lock');
+            disableScroll();
 
             document.body.style.paddingRight = `${scroll}px`;
             if (fixScroll.length > 0) {
@@ -54,20 +60,63 @@ function bindModal(triggerSelector, modalSelector, closeSelector, speed) {
             }
 
             modalContent.classList.add('modal-open');
+            modalContent.setAttribute('aria-hidden', false);
             lastFocus = document.activeElement;
             modal.setAttribute('tabindex', '0');
 
             setTimeout(() => {
                 modal.focus();
+                /** если фокус на первый активный элемент, то  focusTrap*/
+				// focusTrap();
             }, speedTime);
         });
     });
 
-    tabLast.addEventListener('keydown', (e) => {
-        if (e.code === 'Tab' && modalOpen) {
-            modal.focus();
+    close.addEventListener('click', () => {
+        popapClose();
+        lastFocus.focus();
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target == modal) {
+            popapClose();
+            lastFocus.focus();
         }
     });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.code === 'Escape' && modalOpen) {
+            popapClose();
+            lastFocus.focus();
+        }
+
+        if (e.code === 'Tab' && modalOpen) {
+            focusCatch(e);
+        }
+    });
+
+    function focusTrap() {
+		const focusable = modalContent.querySelectorAll(focusElements);
+		if (modalOpen) {
+			focusable[0].focus();
+		}
+	}
+
+	function focusCatch(e) {
+		const focusable = modalContent.querySelectorAll(focusElements);
+		const focusArray = Array.prototype.slice.call(focusable); //Преобразуем псевдомассив в массив
+		const focusedIndex = focusArray.indexOf(document.activeElement);
+
+		if (e.shiftKey && focusedIndex === 0) {
+			focusArray[focusArray.length - 1].focus();
+			e.preventDefault();
+		}
+
+		if (!e.shiftKey && focusedIndex === focusArray.length - 1) {
+			focusArray[0].focus();
+			e.preventDefault();
+		}
+	}
 
     function popapClose() {
         modalOpen = false;
@@ -75,7 +124,8 @@ function bindModal(triggerSelector, modalSelector, closeSelector, speed) {
             item.classList.remove('modal-open');
         });
         modal.classList.remove('is-open');
-        document.body.classList.remove('scroll-lock');
+        enableScroll();
+
         document.body.style.paddingRight = `0px`;
         if (fixScroll.length > 0) {
             fixScroll.forEach(item => {
@@ -88,26 +138,9 @@ function bindModal(triggerSelector, modalSelector, closeSelector, speed) {
             })
         }
         modal.classList.remove('is-open');
+        modalContent.setAttribute('aria-hidden', true);
         modal.setAttribute('tabindex', '-1');
     }
-
-    close.addEventListener('click', () => {
-        popapClose();
-        lastFocus.focus();
-    });
-
-    modal.addEventListener('click', (e) => {
-        if (e.target == modal) {
-            popapClose(); 
-        }
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if (e.code === 'Escape' && modalOpen) {
-            popapClose();
-            lastFocus.focus();
-        }
-    });
 
     function calcScroll() {
         let div = document.createElement('div');

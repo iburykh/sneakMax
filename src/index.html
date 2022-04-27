@@ -7,8 +7,8 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>SneakMax</title>
 	<meta name="description" content="описание">
-@@include('blocks/_favicon.html')
-@@include('blocks/_fonts.html')
+@@include('parts/favicon.html')
+@@include('parts/fonts.html')
 
 	<link rel="stylesheet" href="css/style.css">
 </head>
@@ -484,11 +484,103 @@
 		</div>
 	</footer>
 
-	<div class="overlay" tabindex="-1">
-		<div class="modal-name" role="dialog" data-modal>
-			<button class="modal-name__close btn-reset" aria-label="закрыть окно">&times;</button>
-			<!-- контент окна -->
-			<input type="text" placeholder="Имя" class="tab-last">
+	<div class="modal-overlay" tabindex="-1">
+		<div class=" modal modal-prod" role="dialog" aria-hidden="true" data-modal>
+			<button class="modal__close btn-reset" aria-label="закрыть окно"></button>
+			<div class="modal-prod__content">
+				<div class="modal-slider">
+					<div class="slider-main swiper">
+						<div class="slider-main__wrapper swiper-wrapper">
+							<div class="slider-main__item swiper-slide">
+								<img src="img/image.jpg" alt="изображение">
+							</div>
+							<div class="slider-main__item swiper-slide">
+								<img src="img/quiz_1.jpg" alt="изображение">
+							</div>
+							<div class="slider-main__item swiper-slide">
+								<img src="img/image.jpg" alt="изображение">
+							</div>
+						</div>
+					</div>
+					<div class="slider-min swiper">
+						<div class="slider-min__wrapper swiper-wrapper">
+							<div class="slider-min__item swiper-slide">
+								<img src="img/image.jpg" alt="изображение">
+							</div>
+							<div class="slider-min__item swiper-slide">
+								<img src="img/image.jpg" alt="изображение">
+							</div>
+							<div class="slider-min__item swiper-slide">
+								<img src="img/image.jpg" alt="изображение">
+							</div>
+						</div>
+					</div>
+					<div class="modal-descr">
+						<h3 class="modal-descr__title">Описание</h3>
+						<div class="modal-descr__text">
+							Кроссовки Nike Blazer Mid '77 Vintage Suede с винтажной подошвой возрождают стиль баскетбольных моделей Nike прошлого, создавая впечатление, что они хранились в шкафу долгие годы. 
+						</div>
+					</div>
+				</div>
+				<div class="modal-info">
+					<div class="modal-info__top">
+						<span class="modal-info__vendor">Артикул: 879876</span>
+						<span class="modal-info__quantity">В наличии: <span>13 шт</span></span>
+					</div>
+					<h3 class="modal-info__title">Женские кроссовки Puma Force 1 Shadow</h3>
+					<div class="modal-info__rate">
+						<img src="img/star.svg" alt="Рейтинг 5 из 5">
+						<img src="img/star.svg" alt="">
+						<img src="img/star.svg" alt="">
+						<img src="img/star.svg" alt="">
+						<img src="img/star.svg" alt="">
+					</div>
+					<div class="modal-info__sizes">
+						<span class="modal-info__subtitle">Выберите размер</span>
+						<ul class="modal-info__sizes-list">
+							<li class="modal-info__item-size">
+								<button class="btn-reset modal-info__size">36</button>
+							</li>
+							<li class="modal-info__item-size">
+								<button class="btn-reset modal-info__size">36</button>
+							</li>
+							<li class="modal-info__item-size">
+								<button class="btn-reset modal-info__size">36</button>
+							</li>
+							<li class="modal-info__item-size">
+								<button class="btn-reset modal-info__size">36</button>
+							</li>
+							<li class="modal-info__item-size">
+								<button class="btn-reset modal-info__size">36</button>
+							</li>
+						</ul>
+					</div>
+					<div class="modal-info__price">
+						<span class="modal-info__current-price">19 789 р</span>
+						<span class="modal-info__old-price">20 578 р</span>
+					</div>
+					<button class="btn btn-reset modal-info__order">Заказать</button>
+					<ul class="modal-info__note">
+						<li class="modal-info__note-item">Бесплатная доставка до двери</li>
+						<li class="modal-info__note-item">Оплата заказа при получении</li>
+						<li class="modal-info__note-item">Обмен в течении двух недель</li>
+					</ul>
+					<div class="modal-property">
+						<h3 class="modal-property__title">Характеристики</h3>
+						<div class="modal-property__chars">
+							<p class="modal-property__item">Пол: Мужской</p>
+							<p class="modal-property__item">Цвета: Разноцветный</p>
+							<p class="modal-property__item">Состав: Кожа, текстиль, резина</p>
+							<p class="modal-property__item">Страна: Вьетнам</p>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="modal-video">
+					<iframe src="https://www.youtube.com/embed/HGiDY4NuTaM"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen></iframe>
+				</div> -->
+			</div>
 		</div>
 	</div>
 
