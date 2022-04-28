@@ -69,7 +69,7 @@
 	&__wrap {
 		display: flex;
 		justify-content: flex-start;
-		align-items: flex-start;
+		align-items:stretch;
 		flex-wrap: wrap;
 		margin: 0px -10px;
 		@media (max-width: 992px) {
@@ -130,6 +130,8 @@
 }
 
 .catalog-item {
+	display: flex;
+	flex-direction: column;
 	width: 278px;
 	margin: 0px 10px 20px 10px;
 	&__img {
@@ -189,6 +191,7 @@
 	}
 
 	&__title {
+		flex: 1 1 auto;
 		margin-top: 10px;
 		font-weight: 400;
 		font-size: 16px;
