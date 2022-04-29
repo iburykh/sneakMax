@@ -10,9 +10,9 @@
 //* small-lock - добавить класс для маленьких блоков с position: absolute или fixed (добавится margin)
 
 
-bindModal('.modal-btn', '.modal-prod', '.modal__close', 500);
+// bindModal('.modal-btn', '.modal-prod', '.modal__close', 500);
 
-function bindModal(triggerSelector, modalSelector, closeSelector, speed) {
+function bindModal(triggerSelector, modalSelector, closeSelector, speed, func) {
     const trigger = document.querySelectorAll(triggerSelector),
             modal = document.querySelector('.modal-overlay'),
             modalContent = document.querySelector(modalSelector),
@@ -39,6 +39,7 @@ function bindModal(triggerSelector, modalSelector, closeSelector, speed) {
             if (target) {
                 e.preventDefault();
             }
+            
             modalOpen = true;
             windows.forEach(item => {
                 item.classList.remove('modal-open');
@@ -64,10 +65,14 @@ function bindModal(triggerSelector, modalSelector, closeSelector, speed) {
             lastFocus = document.activeElement;
             modal.setAttribute('tabindex', '0');
 
+            //* получение id кнопки
+            if (modalContent.classList.contains('modal-prod')) {
+                let openBtnId = lastFocus.dataset.id;
+                func(openBtnId);
+            }
+
             setTimeout(() => {
                 modal.focus();
-                /** если фокус на первый активный элемент, то  focusTrap*/
-				// focusTrap();
             }, speedTime);
         });
     });
@@ -75,6 +80,8 @@ function bindModal(triggerSelector, modalSelector, closeSelector, speed) {
     close.addEventListener('click', () => {
         popapClose();
         lastFocus.focus();
+        // minSlider.update();
+        // mainSlider.update();
     });
 
     modal.addEventListener('click', (e) => {
@@ -98,7 +105,9 @@ function bindModal(triggerSelector, modalSelector, closeSelector, speed) {
     function focusTrap() {
 		const focusable = modalContent.querySelectorAll(focusElements);
 		if (modalOpen) {
-			focusable[0].focus();
+            if (focusable.length) {
+                focusable[0].focus();
+            }
 		}
 	}
 

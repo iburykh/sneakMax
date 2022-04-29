@@ -90,7 +90,7 @@ $transition-time: 0.5s;
 	height: 76px;
 	margin-top: 20px;
 	&__item {
-		width: 70px;
+		width: 70px !important;
 		cursor: pointer;
 		img {
 			width: 100%;
