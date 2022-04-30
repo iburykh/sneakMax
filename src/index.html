@@ -14,7 +14,7 @@
 </head>
 
 <body>
-	<header id="up" class="header lock">
+	<header id="up" class="header block-fix">
 		<div class="header__container container">
 			<div class="header__wrapper">
 				<a class="header__logo" aria-label="логотип">SneakMax</a>
@@ -113,14 +113,14 @@
 				</div>
 				<div class="catalog__products">
 					<div class="catalog__wrap">
-						<!-- <article class="catalog-item">
+						<article class="catalog-item">
 							<div class="catalog-item__img">
 								<picture>
 									<source srcset="img/image.webp" type="image/webp">
 									<img src="img/image.jpg" loading="lazy" alt="">
 								</picture>
 								<div class="catalog-item__btns">
-									<button class="catalog-item__btn btn-reset modal-btn" aria-label="Показать информацию о товаре">
+									<button class="catalog-item__btn btn-reset modal-btn" data-modal-btn="modal-prod" aria-label="Показать информацию о товаре">
 										<svg><use xlink:href="img/sprite.svg#show"></use></svg>
 									</button>
 									<button class="catalog-item__btn btn-reset" aria-label="Добавить товар в корзину">
@@ -132,7 +132,7 @@
 								Кроссовки Nike Air Force 1 '07 QS
 							</h3>
 							<span class="catalog-item__price">11 000 р</span>
-						</article> -->
+						</article>
 					</div>
 					<button class="catalog__more btn btn-reset">Показать еще</button>
 				</div>
@@ -487,11 +487,12 @@
 	<div class="modal-overlay" tabindex="-1">
 		<div class=" modal modal-prod" role="dialog" aria-hidden="true" data-modal>
 			<button class="modal__close btn-reset" aria-label="закрыть окно"></button>
-			<div class="modal-prod__content">
+			<button class="two i-btn">Нажми на меня</button>
+			<!-- <div class="modal-prod__content">
 				<div class="modal-slider">
 					<div class="slider-main swiper">
 						<div class="slider-main__wrapper swiper-wrapper">
-							<!-- <div class="slider-main__item swiper-slide">
+							<div class="slider-main__item swiper-slide">
 								<img src="img/image.jpg" alt="изображение">
 							</div>
 							<div class="slider-main__item swiper-slide">
@@ -499,20 +500,20 @@
 							</div>
 							<div class="slider-main__item swiper-slide">
 								<img src="img/image.jpg" alt="изображение">
-							</div> -->
+							</div>
 						</div>
 					</div>
 					<div class="slider-min swiper">
 						<div class="slider-min__wrapper swiper-wrapper">
-							<!-- <div class="slider-min__item swiper-slide">
-								<img src="img/image.jpg" alt="изображение">
-							</div>
 							<div class="slider-min__item swiper-slide">
 								<img src="img/image.jpg" alt="изображение">
 							</div>
 							<div class="slider-min__item swiper-slide">
 								<img src="img/image.jpg" alt="изображение">
-							</div> -->
+							</div>
+							<div class="slider-min__item swiper-slide">
+								<img src="img/image.jpg" alt="изображение">
+							</div>
 						</div>
 					</div>
 				</div>
@@ -521,37 +522,39 @@
 						<span class="modal-info__vendor">Артикул: 879876</span>
 						<span class="modal-info__quantity">В наличии: <span>13 шт</span></span>
 					</div>
-					<h3 class="modal-info__title">Женские кроссовки Puma Force 1 Shadow</h3>
-					<div class="modal-info__rate">
-						<img src="img/star.svg" alt="Рейтинг 5 из 5">
-						<img src="img/star.svg" alt="">
-						<img src="img/star.svg" alt="">
-						<img src="img/star.svg" alt="">
-						<img src="img/star.svg" alt="">
-					</div>
-					<div class="modal-info__sizes">
-						<span class="modal-info__subtitle">Выберите размер</span>
-						<ul class="modal-info__sizes-list">
-							<li class="modal-info__item-size">
-								<button class="btn-reset modal-info__size">36</button>
-							</li>
-							<li class="modal-info__item-size">
-								<button class="btn-reset modal-info__size">36</button>
-							</li>
-							<li class="modal-info__item-size">
-								<button class="btn-reset modal-info__size">36</button>
-							</li>
-							<li class="modal-info__item-size">
-								<button class="btn-reset modal-info__size">36</button>
-							</li>
-							<li class="modal-info__item-size">
-								<button class="btn-reset modal-info__size">36</button>
-							</li>
-						</ul>
-					</div>
-					<div class="modal-info__price">
-						<span class="modal-info__current-price">19 789 р</span>
-						<span class="modal-info__old-price">20 578 р</span>
+					<div class="modal-info__wrapper">
+						<h3 class="modal-info__title">Женские кроссовки Puma Force 1 Shadow</h3>
+						<div class="modal-info__rate">
+							<img src="img/star.svg" alt="Рейтинг 5 из 5">
+							<img src="img/star.svg" alt="">
+							<img src="img/star.svg" alt="">
+							<img src="img/star.svg" alt="">
+							<img src="img/star.svg" alt="">
+						</div>
+						<div class="modal-info__sizes">
+							<span class="modal-info__subtitle">Выберите размер</span>
+							<ul class="modal-info__sizes-list">
+								<li class="modal-info__item-size">
+									<button class="btn-reset modal-info__size">36</button>
+								</li>
+								<li class="modal-info__item-size">
+									<button class="btn-reset modal-info__size">36</button>
+								</li>
+								<li class="modal-info__item-size">
+									<button class="btn-reset modal-info__size">36</button>
+								</li>
+								<li class="modal-info__item-size">
+									<button class="btn-reset modal-info__size">36</button>
+								</li>
+								<li class="modal-info__item-size">
+									<button class="btn-reset modal-info__size">36</button>
+								</li>
+							</ul>
+						</div>
+						<div class="modal-info__price">
+							<span class="modal-info__current-price">19 789 р</span>
+							<span class="modal-info__old-price">20 578 р</span>
+						</div>
 					</div>
 					<button class="btn btn-reset modal-info__order">Заказать</button>
 					<ul class="modal-info__note">
@@ -577,12 +580,16 @@
 						</div>
 					</div>
 				</div>
-				<!-- <div class="modal-video">
+				<div class="modal-video">
 					<iframe src="https://www.youtube.com/embed/HGiDY4NuTaM"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 					allowfullscreen></iframe>
-				</div> -->
-			</div>
+				</div>
+			</div> -->
+		</div>
+		<div class=" modal modal-i" role="dialog" aria-hidden="true" data-modal>
+			<button class="modal__close btn-reset" aria-label="закрыть окно"></button>
+			<button class="two">Это я!</button>
 		</div>
 	</div>
 

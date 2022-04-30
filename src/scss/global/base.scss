@@ -13,6 +13,7 @@ body {
     line-height: 1;
     color: $color-text;
     &.scroll-lock {
+        position: relative;
         position: fixed;
         right: 0;
         left: 0;

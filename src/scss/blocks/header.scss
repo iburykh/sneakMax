@@ -1,8 +1,10 @@
 .header {
 	background-color: $main-color;
 	position: fixed;
+	left: 0;
+	top: 0;
 	width: 100%;
-	z-index: 10;
+	z-index: 100;
 }
 .header__wrapper {
 	height: 100%;

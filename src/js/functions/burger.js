@@ -5,12 +5,15 @@ let hamburger = document.querySelector('.hamburger');
 hamburger.addEventListener('click', () => {    
     hamburger.classList.toggle('active');
     menuBody.classList.toggle('active');
-    disableScroll();
+
     if (hamburger.classList.contains('active')) {
         hamburger.setAttribute('aria-label', 'закрыть навигацию');
     } else {
         hamburger.setAttribute('aria-label', 'открыть навигацию');
     }
+
+    // если не надо блокировать задний фон - убрать!
+    document.body.classList.toggle('scroll-lock');
 
     setTimeout(() => {
         menuBody.focus();
@@ -23,8 +26,10 @@ menuItem.forEach(item => {
         if (hamburger.classList.contains('active')) {
             hamburger.classList.remove('active');
             menuBody.classList.remove('active');
-            enableScroll();
             hamburger.setAttribute('aria-label', 'открыть навигацию');
+
+            // если не надо блокировать задний фон - убрать!
+            document.body.classList.remove('scroll-lock');
         }
     })
 })
@@ -54,19 +59,3 @@ filterBtn.addEventListener('click', (e) => {
         filterBurger.setAttribute('aria-label', 'открыть фильтр'); 
     }
 })
-
-// scroll-lock
-function disableScroll() {
-	let pagePosition = window.scrollY;
-	document.body.classList.add('scroll-lock');
-	document.body.dataset.position = pagePosition;
-	document.body.style.top = -pagePosition + 'px';
-}
-
-function enableScroll() {
-	let pagePosition = parseInt(document.body.dataset.position, 10);
-	document.body.style.top = 'auto';
-	document.body.classList.remove('scroll-lock');
-	window.scroll({ top: pagePosition, left: 0 });
-	document.body.removeAttribute('data-position');
-}
