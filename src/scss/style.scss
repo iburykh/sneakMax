@@ -3,12 +3,12 @@
 @import 'global/fonts.scss';
 @import 'global/base.scss';
 @import 'global/container.scss';
-@import 'global/animation.scss';
 
 //============libs============
 @import 'libs_css/normalize.scss';
 @import 'libs_css/nouislider.min.scss';
 @import 'libs_css/swiper-bundle.scss';
+@import 'libs_css/simplebar.scss';
 // @import 'libs_css/swiper-bundle.scss';
 
 //============blocks==========
@@ -25,3 +25,4 @@
 @import 'blocks/connect.scss';
 @import 'blocks/footer.scss';
 @import 'blocks/modal.scss';
+@import 'blocks/mini-cart.scss';

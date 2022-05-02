@@ -40,7 +40,7 @@
 				<a class="header__logo" aria-label="логотип">SneakMax</a>
 				<div class="header__menu">
 					<nav class="menu" tabindex="-1">
-						<ul class="menu__list">
+						<ul class="menu__list list-reset">
 							<li class="menu__item"><a href="#" class="menu__link">Каталог</a></li>
 							<li class="menu__item"><a href="#" class="menu__link">О нас</a></li>
 							<li class="menu__item"><a href="#" class="menu__link">Подбор товара</a></li>
@@ -54,6 +54,49 @@
 						<svg><use xlink:href="img/sprite.svg#cart"></use></svg>
 						<div class="cart__count">1</div>
 					</button>
+					<div class="mini-cart">
+						<div class="mini-cart__products" data-simplebar>
+							<ul class="mini-cart__list list-reset">
+								<li class="mini-cart__item mini-cart__item--active">
+									<div class="mini-cart__image">
+										<img src="img/image.jpg" alt="изображение" width="100" height="100">
+									</div>
+									<div class="mini-cart__content">
+										<h3 class="mini-cart__title">Женские кроссовки Puma Force 1 Shadow</h3>
+										<span class="mini-cart__price">8 678 p</span>
+									</div>
+									<button class="mini-cart__delete btn-reset"></button>
+								</li>
+								<li class="mini-cart__item">
+									<div class="mini-cart__image">
+										<img src="img/image.jpg" alt="изображение" width="100" height="100">
+									</div>
+									<div class="mini-cart__content">
+										<h3 class="mini-cart__title">Женские кроссовки Puma Force 1 Shadow</h3>
+										<span class="mini-cart__price">8 678 p</span>
+									</div>
+									<button class="mini-cart__delete btn-reset"></button>
+								</li>
+								<li class="mini-cart__item">
+									<div class="mini-cart__image">
+										<img src="img/image.jpg" alt="изображение" width="100" height="100">
+									</div>
+									<div class="mini-cart__content">
+										<h3 class="mini-cart__title">Женские кроссовки Puma Force 1 Shadow</h3>
+										<span class="mini-cart__price">8 678 p</span>
+									</div>
+									<button class="mini-cart__delete btn-reset"></button>
+								</li>
+							</ul>
+						</div>
+						<div class="mini-cart__footer">
+							<div class="mini-cart__itog">
+								<span class="mini-cart__txt">Итого:</span>
+								<span class="mini-cart__summ">25 789 р</span>
+							</div>
+							<button class="mini-cart__btn btn btn-reset">Перейти в корзину</button>
+						</div>
+					</div>
 					<button class="hamburger btn-reset" aria-label="открыть навигацию">
 						<span></span>
 						<span></span>
@@ -133,14 +176,14 @@
 				</div>
 				<div class="catalog__products">
 					<div class="catalog__wrap">
-						<article class="catalog-item">
+						<!-- <article class="catalog-item">
 							<div class="catalog-item__img">
 								<picture>
 									<source srcset="img/image.webp" type="image/webp">
 									<img src="img/image.jpg" loading="lazy" alt="">
 								</picture>
 								<div class="catalog-item__btns">
-									<button class="catalog-item__btn btn-reset modal-btn" data-modal-btn="modal-prod" aria-label="Показать информацию о товаре">
+									<button class="catalog-item__btn btn-reset modal-btn" aria-label="Показать информацию о товаре">
 										<svg><use xlink:href="img/sprite.svg#show"></use></svg>
 									</button>
 									<button class="catalog-item__btn btn-reset" aria-label="Добавить товар в корзину">
@@ -152,7 +195,7 @@
 								Кроссовки Nike Air Force 1 '07 QS
 							</h3>
 							<span class="catalog-item__price">11 000 р</span>
-						</article>
+						</article> -->
 					</div>
 					<button class="catalog__more btn btn-reset">Показать еще</button>
 				</div>
@@ -420,7 +463,7 @@
 	<section class="questions">
 		<div class="questions__container container">
 			<h2 class="questions__title title">Часто задаваемые вопросы</h2>
-			<ul class="questions__accordion">
+			<ul class="questions__accordion list-reset">
 				<li class="accordion">
 					<button class="accordion__control btn-reset" aria-expanded="false">
 						<span class="accordion__title">Вопрос 1</span>
@@ -490,7 +533,7 @@
 			<div class="footer__wrapper">
 				<a class="footer__logo" aria-label="логотип">SneakMax</a>
 				<nav class="footer-menu">
-					<ul class="footer-menu__list">
+					<ul class="footer-menu__list list-reset">
 						<li class="footer-menu__item"><a href="#" class="footer-menu__link">Каталог</a></li>
 						<li class="footer-menu__item"><a href="#" class="footer-menu__link">О нас</a></li>
 						<li class="footer-menu__item"><a href="#" class="footer-menu__link">Подбор товара</a></li>
@@ -507,12 +550,11 @@
 	<div class="modal-overlay" tabindex="-1">
 		<div class=" modal modal-prod" role="dialog" aria-hidden="true" data-modal>
 			<button class="modal__close btn-reset" aria-label="закрыть окно"></button>
-			<button class="two i-btn">Нажми на меня</button>
-			<!-- <div class="modal-prod__content">
+			<div class="modal-prod__content">
 				<div class="modal-slider">
 					<div class="slider-main swiper">
 						<div class="slider-main__wrapper swiper-wrapper">
-							<div class="slider-main__item swiper-slide">
+							<!-- <div class="slider-main__item swiper-slide">
 								<img src="img/image.jpg" alt="изображение">
 							</div>
 							<div class="slider-main__item swiper-slide">
@@ -520,12 +562,12 @@
 							</div>
 							<div class="slider-main__item swiper-slide">
 								<img src="img/image.jpg" alt="изображение">
-							</div>
+							</div> -->
 						</div>
 					</div>
 					<div class="slider-min swiper">
 						<div class="slider-min__wrapper swiper-wrapper">
-							<div class="slider-min__item swiper-slide">
+							<!-- <div class="slider-min__item swiper-slide">
 								<img src="img/image.jpg" alt="изображение">
 							</div>
 							<div class="slider-min__item swiper-slide">
@@ -533,7 +575,7 @@
 							</div>
 							<div class="slider-min__item swiper-slide">
 								<img src="img/image.jpg" alt="изображение">
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
@@ -553,7 +595,7 @@
 						</div>
 						<div class="modal-info__sizes">
 							<span class="modal-info__subtitle">Выберите размер</span>
-							<ul class="modal-info__sizes-list">
+							<ul class="modal-info__sizes-list list-reset">
 								<li class="modal-info__item-size">
 									<button class="btn-reset modal-info__size">36</button>
 								</li>
@@ -577,7 +619,7 @@
 						</div>
 					</div>
 					<button class="btn btn-reset modal-info__order">Заказать</button>
-					<ul class="modal-info__note">
+					<ul class="modal-info__note list-reset">
 						<li class="modal-info__note-item">Бесплатная доставка до двери</li>
 						<li class="modal-info__note-item">Оплата заказа при получении</li>
 						<li class="modal-info__note-item">Обмен в течении двух недель</li>
@@ -601,16 +643,18 @@
 					</div>
 				</div>
 				<div class="modal-video">
-					<iframe src="https://www.youtube.com/embed/HGiDY4NuTaM"
+					<!-- <iframe src="https://www.youtube.com/embed/HGiDY4NuTaM"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen></iframe>
+					allowfullscreen></iframe> -->
 				</div>
-			</div> -->
+			</div>
 		</div>
-		<div class=" modal modal-i" role="dialog" aria-hidden="true" data-modal>
-			<button class="modal__close btn-reset" aria-label="закрыть окно"></button>
-			<button class="two">Это я!</button>
-		</div>
+
+		<!-- <div class="modal modal-name" role="dialog" aria-hidden="true" data-modal>
+			<button class="modal__close btn-reset" aria-label="закрыть окно">&times;</button>
+			<input name="name" placeholder="Имя" type="text" autocomplete="on" class="input">
+			<button class="modal-name__next btn-reset" data-inside>Следующее окно</button>
+		</div> -->
 	</div>
 
 	<!-- <script async src="resources/zenscroll.min.js"></script> -->

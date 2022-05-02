@@ -2,16 +2,16 @@
 
 const catalogProducts = document.querySelector('.catalog__wrap');
 const catalogMore = document.querySelector('.catalog__more');
-// const prodModal = document.querySelector('.modal-prod__content');
-// const prodModalSlider = prodModal.querySelector('.slider-main__wrapper');
-// const prodModalPreview = prodModal.querySelector('.slider-min__wrapper');
-// const prodModalInfo = prodModal.querySelector('.modal-info__wrapper');
-// const prodModalDescr = prodModal.querySelector('.modal-descr__text');
-// const prodModalChars = prodModal.querySelector('.modal-char__items');
-// const prodModalVideo = prodModal.querySelector('.modal-video');
-let prodQuantity = 6;
+const prodModal = document.querySelector('.modal-prod__content');
+const prodModalSlider = prodModal.querySelector('.slider-main__wrapper');
+const prodModalPreview = prodModal.querySelector('.slider-min__wrapper');
+const prodModalInfo = prodModal.querySelector('.modal-info__wrapper');
+const prodModalDescr = prodModal.querySelector('.modal-descr__text');
+const prodModalChars = prodModal.querySelector('.modal-char__items');
+const prodModalVideo = prodModal.querySelector('.modal-video');
+let prodQuantity = 6; // количество карточек на странице изначально
+let addQuantity = 3; // количество добавляемых карточек при клике на кнопку "Показать ещё"
 let dataLength = null;
-let dataModal = null;
 
 // функция вставляет пробел между разрядами
 const normalPrice = (str) => {
@@ -44,7 +44,6 @@ const modalSlider = () => {
 	});
 };
 
-
 if (catalogProducts) {
 	//* функция создания карточек в каталоге товаров
 	const getProducts = async (quantity = 5) => {
@@ -55,9 +54,10 @@ if (catalogProducts) {
 			dataLength = data.length;
 		
 			catalogProducts.innerHTML = '';
-	
+
+			// формируем сетку из 6 карточек товаров на странице (6 - это число prodQuantity)
 			for (let i = 0; i < dataLength; i++) {
-				if (i < quantity) {
+				if (i < prodQuantity) {
 				let item = data[i];
 	
 					catalogProducts.innerHTML += `
@@ -65,7 +65,7 @@ if (catalogProducts) {
 							<div class="catalog-item__img">
 								<img src="${item.mainImage}" loading="lazy" alt="${item.title}">
 								<div class="catalog-item__btns">
-									<button class="catalog-item__btn btn-reset modal-btn" data-modal-btn="modal-prod" data-id="${item.id}" aria-label="Показать информацию о товаре">
+									<button class="catalog-item__btn btn-reset modal-btn" data-id="${item.id}" aria-label="Показать информацию о товаре">
 										<svg><use xlink:href="img/sprite.svg#show"></use></svg>
 									</button>
 									<button class="catalog-item__btn btn-reset" data-id="${item.id}" aria-label="Добавить товар в корзину">
@@ -80,35 +80,56 @@ if (catalogProducts) {
 				}
 			}
 
-			//! функцию модального окна запускать тут
-			bindModal('.modal-btn', '.modal-prod', 500);
-			// dataModal = new Modal();
-
-			// dataModal = new Modal({
-			// 	isOpen: (modal) => {
-			// 	  if (modal.modalContainer.classList.contains('modal-prod')) {
-			// 		const openBtnId = modal.previousActiveElement.dataset.id;
-			// 		console.log(openBtnId);
-					
-	  
-			// 		// loadModalData(openBtnId);
-			// 	  }
-			// 	},
-			//   });
-
-			//TODO - добавить аргумент func в функцию bindModal(triggerSelector, modalSelector, closeSelector, speed, func)
+			// функцию модального окна запускать тут
+			bindModal('.modal-btn', '.modal-prod', getModalData);
+			//TODO - добавить аргумент func в функцию bindModal(btnSelector, modalSelector, func, animate='fade', speed=300,)
 			//TODO - вставить этот код в функцию bindModal (модальное окно) в момент открытия окна после получения lastFocus
 			// получение id кнопки
 			// if (modalContent.classList.contains('modal-prod')) {
 			// 	let openBtnId = lastFocus.dataset.id;
 			// 	func(openBtnId);
 			// }
+
+			// по клику на кнопку "Показать ещё" добавляем по 3 карточки товара (3 - это число addQuantity) 
+			catalogMore.addEventListener('click', (e) => {
+				let a = prodQuantity;
+				prodQuantity = prodQuantity + addQuantity;
+				for (let i = a; i < dataLength; i++) {
+					if (i < prodQuantity) {
+					let item = data[i];
+						catalogProducts.innerHTML += `
+							<article class="catalog-item">
+								<div class="catalog-item__img">
+									<img src="${item.mainImage}" loading="lazy" alt="${item.title}">
+									<div class="catalog-item__btns">
+										<button class="catalog-item__btn btn-reset modal-btn" data-id="${item.id}" aria-label="Показать информацию о товаре">
+											<svg><use xlink:href="img/sprite.svg#show"></use></svg>
+										</button>
+										<button class="catalog-item__btn btn-reset" data-id="${item.id}" aria-label="Добавить товар в корзину">
+											<svg><use xlink:href="img/sprite.svg#cart"></use></svg>
+										</button>
+									</div>
+								</div>
+								<h3 class="catalog-item__title">${item.title}</h3>
+								<span class="catalog-item__price">${normalPrice(item.price)} р</span>
+							</article>
+						`;
+					}
+				}
+				if (prodQuantity >= dataLength) {
+					catalogMore.style.display = 'none';
+				} else {
+					catalogMore.style.display = 'block';
+				}
+				bindModal('.modal-btn', '.modal-prod', getModalData);
+			});
+
 		} else {
 			console.log(('error', response.status));
 		}
 	};
 
-	// getProducts(prodQuantity);	
+	getProducts(prodQuantity);
 
 	//* функция создания окна товара
 	const getModalData = async (id = 1) => {
@@ -166,7 +187,7 @@ if (catalogProducts) {
 						</div>
 						<div class="modal-info__sizes">
 							<span class="modal-info__subtitle">Выберите размер</span>
-							<ul class="modal-info__sizes-list">
+							<ul class="modal-info__sizes-list list-reset">
 								${sizes.join('')}
 							</ul>
 						</div>
@@ -207,14 +228,15 @@ if (catalogProducts) {
 
 	};
   
-	catalogMore.addEventListener('click', (e) => {
-		//* +3 - добавлять по з карточки товара
-		prodQuantity = prodQuantity + 3;
-		getProducts(prodQuantity);
-		if (prodQuantity >= dataLength) {
-			catalogMore.style.display = 'none';
-		} else {
-			catalogMore.style.display = 'block';
-		}
-	});
+	// catalogMore.addEventListener('click', (e) => {
+	// 	//* +3 - добавлять по з карточки товара
+	// 	prodQuantity = prodQuantity + addQuantity;
+	// 	getProducts(prodQuantity);
+	// 	if (prodQuantity >= dataLength) {
+	// 		catalogMore.style.display = 'none';
+	// 	} else {
+	// 		catalogMore.style.display = 'block';
+	// 	}
+	// });
+
 }

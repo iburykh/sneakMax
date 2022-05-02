@@ -34,20 +34,14 @@ $transition-time: 0.5s;
 
 .modal {
 	position: relative;
-	display: inline-block;
+	display: none;
 	margin: 50px auto;
 	vertical-align: middle;
 	padding: 40px;
 	background-color: $color-white;
 	cursor: default;
-	pointer-events: none;
-	opacity: 0;
-	visibility: hidden;
-	transition: opacity $transition-time, visibility $transition-time;
 	&.modal-open {
-		pointer-events: auto;
-		opacity: 1;
-		visibility: visible;
+		display: inline-block;
 	}
 	&__close {
 		position: absolute;
@@ -58,6 +52,28 @@ $transition-time: 0.5s;
 		width: 17px;
 		height: 17px;
 	}
+}
+
+.fade {
+	opacity: 0;
+	transition: opacity $transition-time;
+}
+
+.fade.animate-open {
+	opacity: 1;
+	transition: opacity $transition-time;
+}
+
+.fadeInUp {
+	opacity: 0;
+	transform: translateY(-100px);
+	transition: opacity $transition-time, transform $transition-time;
+}
+
+.fadeInUp.animate-open {
+	opacity: 1;
+	transform: translateY(0);
+	transition: opacity $transition-time, transform $transition-time;
 }
 
 .modal-prod {

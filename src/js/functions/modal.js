@@ -1,193 +1,189 @@
+//? Параметры:
+//* btnSelector - кнопка открытия модального окна
+//* modalSelector - модальное окно внутри фона modal
+
+//? эти парвметры менять по умолчанию, либо указывать их как аргумент, если они разные для разных окон
+//* animate - анимация при открытии модального окна (контента внутри оболочки)
+//* speed - время выполнения, ставится в соответствии с $transition-time
+
 //TODO Добавить классы:
-//* data-modal-btn="modal-prod" - атрибут кнопки вызова модального окна с классом модального окна
-//* data-speed="300" - добавить кнопке вызова окна, если скорость анимации отличается от 500 (по умолчанию)
+//* data-modal - добавить всем модальным окнам (modal-name) (если их несколько)
 //* block-fix - добавить класс для блоков с position: absolute или fixed (добавится padding)
 //* small-fix - добавить класс для маленьких блоков с position: absolute или fixed (добавится margin)
+//* data-inside - добавить кнопкам внутри модального окна, которые открывают следующее модальное окно (что бы сохранить фокус на кнопке вне окна)
 
-// class Modal {
-//     constructor(options) {
-//         let defaultOptions = {
-// 			isOpen: ()=>{},
-// 			isClose: ()=>{},
-// 		}
-//         this.options = Object.assign(defaultOptions, options);
-//         this.modal = document.querySelector('.modal-overlay');
-//         this.speed = 500;
-//         this._reOpen = false;
-//         this._nextContainer = false;
-//         this.modalContainer = false;
-//         this.isOpen = false;
-//         this.previousActiveElement = false;
-//         this._focusElements = [
-// 			'a[href]',
-// 			'input',
-// 			'select',
-// 			'textarea',
-// 			'button',
-// 			'iframe',
-// 			'[contenteditable]',
-// 			'[tabindex]:not([tabindex^="-"])'
-// 		];
-//         this._fixBlocks = document.querySelectorAll('.block-fix');
-//         this._fixSmall = document.querySelectorAll('.small-fix');
-//         this.events();
-//     }
-//     events() {
-// 		if (this.modal) {
-// 			document.addEventListener('click', function(e) {
-// 				const clickedElement = e.target.closest('[data-modal-btn]');
-// 				if (clickedElement) {
-// 					let target = clickedElement.dataset.modalBtn;
-//                     let speed =  clickedElement.dataset.speed;
-//                     this.speed = speed ? parseInt(speed) : 500;
-// 					this._nextContainer = document.querySelector(`.${target}`);
-// 					this.open();
-// 					return;
-// 				}
+bindModal('.modal-btn', '.modal-prod');
 
-// 				if (e.target.closest('.modal__close')) {
-// 					this.close();
-// 					return;
-// 				}
-// 			}.bind(this));
+let lastFocus = false;
 
-// 			window.addEventListener('keydown', function(e) {
-// 				if (e.code === 'Escape' && this.isOpen) {
-// 					this.close();
-//                     return;
-// 				}
+function bindModal(btnSelector, modalSelector, func, animate='fade', speed=500,) {
+    const modalBtn = document.querySelectorAll(btnSelector);
+	const modal = document.querySelector('.modal-overlay');
+	const modalContent = document.querySelector(modalSelector);
+	const modalclose = modalContent.querySelector('.modal__close');
+	const openWindows = document.querySelectorAll('[data-modal]');
+	const fixBlocks = document.querySelectorAll('.block-fix ');
+	const fixSmall = document.querySelectorAll('.small-fix');
+	const speedTime = (speed);
+	// const modalAnimation = animate;
+    const modalScroll = window.innerWidth - document.body.offsetWidth;
+    const focusElements = [
+		'a[href]',
+		'input',
+		'select',
+		'textarea',
+		'button',
+		'iframe',
+		'[contenteditable]',
+		'[tabindex]:not([tabindex^="-"])'
+	];
+	
+	if (modal) {
+		modalBtn.forEach(function(item) {
+			item.addEventListener('click', function(e) {
+				let target = e.target
+				if (target) {
+					e.preventDefault();
+					openModal(target);
+				}
+			});
+		});
+	
+		modalclose.addEventListener('click', () => {
+			if (modal.classList.contains("is-open")) {
+				closeModal();
+			}
+		});
+	
+		document.addEventListener('click', (e) => {
+			if (e.target.classList.contains('modal-overlay') && e.target.classList.contains("is-open")) {
+				closeModal();			
+			}
+		});
+		
+	
+		document.addEventListener('keydown', (e) => {
+			if (e.code === 'Escape' && modal.classList.contains("is-open")) {
+				closeModal();
+			}
+	
+			if (e.code === 'Tab' && modal.classList.contains("is-open")) {
+				focusCatch(e);
+			}
+		});
+	}
+	function openModal(tar) {
+		if (!tar.closest(`[data-inside]`)) {
+			lastFocus = document.activeElement;
+		}
 
-// 				if (e.code === 'Tab' && this.isOpen) {
-// 					this.focusCatch(e);
-// 					return;
-// 				}
-// 			}.bind(this));
+		openWindows.forEach(item => {
+			item.classList.remove('modal-open');
+			item.setAttribute('aria-hidden', true);
+			// item.classList.remove('animate-open');
+			// item.classList.remove(modalAnimation);
+		});
 
-// 			document.addEventListener('click', function(e) {
-// 				if (e.target.classList.contains('modal-overlay') && e.target.classList.contains("is-open")) {
-// 					this.close();
-// 				}
-// 			}.bind(this));
-// 		}
-// 	}
+		if (!modal.classList.contains('is-open')){
+			disableScroll();
+		}
 
-//     open(selector) {
-// 		this.previousActiveElement = document.activeElement;
+		if (modalContent.classList.contains('modal-prod')) {
+			let openBtnId = lastFocus.dataset.id;	
+			func(openBtnId);
+		}
 
-// 		if (this.isOpen) {
-// 			this.reOpen = true;
-// 			this.close();
-// 			return;
-// 		}
+		modal.classList.add('is-open');
+		modal.setAttribute('tabindex', '0');
 
-// 		this.modalContainer = this._nextContainer;
+		document.body.style.paddingRight = `${modalScroll}px`;
+		if (fixBlocks.length > 0) {
+			fixBlocks.forEach(item => {
+				item.style.paddingRight = `${modalScroll}px`;
+			})
+		}
+		if (fixSmall.length > 0) {
+			fixSmall.forEach(item => {
+				item.style.marginRight = `${modalScroll}px`;
+			})
+		}
 
-// 		this.modal.classList.add('is-open');
-//         this.modal.setAttribute('tabindex', '0');
+		modalContent.classList.add('modal-open');
+		modalContent.setAttribute('aria-hidden', false);
+		// modalContent.classList.add(modalAnimation);
 
-// 		this.disableScroll();
+		setTimeout(() => {
+			// modalContent.classList.add('animate-open');
+			focusTrap();
+		}, speedTime);
+	}
 
-// 		this.modalContainer.classList.add('modal-open');
-//         this.modalContainer.setAttribute('aria-hidden', false);
+	function closeModal() {
+		openWindows.forEach(item => {
+			item.classList.remove('modal-open');
+			item.setAttribute('aria-hidden', true);
+			// item.classList.remove('animate-open');
+			// item.classList.remove(modalAnimation);
+		});
 
-// 		setTimeout(() => {
-// 			this.options.isOpen(this);
-// 			this.isOpen = true;
-// 			this.focusTrap();
-// 		}, this.speed);
-// 	}
+		enableScroll();
 
-//     close() {
-// 		if (this.modalContainer) {
-// 			this.modal.classList.remove('is-open');
-//             this.modal.setAttribute('tabindex', '-1');
-// 			this.modalContainer.classList.remove('modal-open');
-//             this.modalContainer.setAttribute('aria-hidden', true);
+		document.body.style.paddingRight = `0px`;
+		if (fixBlocks.length > 0) {
+			fixBlocks.forEach(item => {
+				item.style.paddingRight = `0px`;
+			})
+		}
+		if (fixSmall.length > 0) {
+			fixSmall.forEach(item => {
+				item.style.marginRight = `0px`;
+			})
+		}
 
-// 			this.enableScroll();
+		modal.classList.remove('is-open');
+		modal.setAttribute('tabindex', '-1');
 
-// 			this.options.isClose(this);
-// 			this.isOpen = false;
-// 			this.focusTrap();
+		focusTrap();
+	}
 
-// 			if (this.reOpen) {
-// 				this.reOpen = false;
-// 				this.open();
-// 			}
-// 		}
-// 	}
+    function disableScroll() {
+        let pagePosition = window.scrollY;
+        document.body.classList.add('scroll-lock');
+        document.body.dataset.position = pagePosition;
+        document.body.style.top = -pagePosition + 'px';
+    }
 
-//     focusCatch(e) {
-// 		const nodes = this.modalContainer.querySelectorAll(this._focusElements);
-// 		const nodesArray = Array.prototype.slice.call(nodes);
-// 		const focusedItemIndex = nodesArray.indexOf(document.activeElement)
-// 		if (e.shiftKey && focusedItemIndex === 0) {
-// 			nodesArray[nodesArray.length - 1].focus();
-// 			e.preventDefault();
-// 		}
-// 		if (!e.shiftKey && focusedItemIndex === nodesArray.length - 1) {
-// 			nodesArray[0].focus();
-// 			e.preventDefault();
-// 		}
-// 	}
+    function enableScroll() {
+        let pagePosition = parseInt(document.body.dataset.position, 10);
+        document.body.style.top = '';
+        document.body.classList.remove('scroll-lock');
+        window.scroll({ top: pagePosition, left: 0 });
+        document.body.removeAttribute('data-position');
+    }
 
-//     focusTrap() {
-// 		// const nodes = this.modalContainer.querySelectorAll(this._focusElements); //* для фокуса на первом элементе окна
-// 		if (this.isOpen) {
-//             this.modal.focus();
-// 			// if (nodes.length) nodes[0].focus(); //* для фокуса на первом элементе окна
-// 		} else {
-// 			this.previousActiveElement.focus();
-// 		}
-// 	}
+    function focusTrap() {
+		// const nodes = this.modalContainer.querySelectorAll(this._focusElements); //* для фокуса на первом элементе окна
+		if (modal.classList.contains("is-open")) {
+            modal.focus();
+			// if (nodes.length) nodes[0].focus(); //* для фокуса на первом элементе окна
+		} else {
+			lastFocus.focus();	
+		}
+	}
 
-//     disableScroll() {
-// 		let pagePosition = window.scrollY;
-// 		console.log(pagePosition);	
-// 		this.lockPadding();
-// 		document.body.classList.add('scroll-lock');
-// 		document.body.dataset.position = pagePosition;
-// 		document.body.style.top = -pagePosition + 'px';
-// 	}
+	function focusCatch(e) {
+		const focusable = modalContent.querySelectorAll(focusElements);
+		const focusArray = Array.prototype.slice.call(focusable);
+		const focusedIndex = focusArray.indexOf(document.activeElement);
 
-// 	enableScroll() {
-// 		let pagePosition = parseInt(document.body.dataset.position, 10);
-// 		this.unlockPadding();
-// 		document.body.style.top = 'auto';
-// 		document.body.classList.remove('scroll-lock');
-// 		window.scroll({
-// 			top: pagePosition,
-// 			left: 0
-// 		});
-// 		document.body.removeAttribute('data-position');
-// 	}
+		if (e.shiftKey && focusedIndex === 0) {
+			focusArray[focusArray.length - 1].focus();
+			e.preventDefault();
+		}
 
-//     lockPadding() {
-// 		let paddingOffset = window.innerWidth - document.body.offsetWidth + 'px';
-//         document.body.style.paddingRight = paddingOffset;
-//         if (this._fixBlocks.length > 0) {
-//             this._fixBlocks.forEach((el) => {
-//                 el.style.paddingRight = paddingOffset;
-//             });
-//         }
-//         if (this._fixSmall.length > 0) {
-//             this._fixSmall.forEach((el) => {
-//                 el.style.marginRight = paddingOffset;
-//             });
-//         }
-// 	}
-
-// 	unlockPadding() {
-//         document.body.style.paddingRight = '0px';
-//         if (this._fixBlocks.length > 0) {
-//             this._fixBlocks.forEach((el) => {
-//                 el.style.paddingRight = '0px';
-//             });
-//         }
-//         if (this._fixSmall.length > 0) {
-//             this._fixSmall.forEach((el) => {
-//                 el.style.marginRight = '0px';
-//             });
-//         }
-// 	}
-// }
+		if (!e.shiftKey && focusedIndex === focusArray.length - 1) {
+			focusArray[0].focus();
+			e.preventDefault();
+		}
+	}
+};
