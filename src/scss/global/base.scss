@@ -97,8 +97,7 @@ input[type=number] {
 
 a:focus,
 button:focus,
-select:focus,
-input:focus  {
+select:focus  {
     outline: 2px solid $color-dark-accent;
     outline-offset: 1px;
 }

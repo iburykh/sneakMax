@@ -49,7 +49,7 @@ if (forms.length > 0) {
 						// console.log(result); // это для проверки на сервере
 
 						if (textMessage) {
-							textMessage.textContent = 'Ok!';
+							textMessage.textContent = 'Спасибо, скоро мы с вами свяжимся!';
 							textMessage.classList.add('active');
 						}
 						clearInputs(inputs);
@@ -59,7 +59,7 @@ if (forms.length > 0) {
 							}
 						}, 5000);
 					} else {
-						alert("Ошибка");
+						// alert("Ошибка");
 						if (textMessage) {
 							textMessage.textContent = 'Что-то пошло не так...';
 							textMessage.classList.add('active');
@@ -72,7 +72,7 @@ if (forms.length > 0) {
 					}
 				};
 				postData('../sendmail.php', formData);
-				// postData('../server.php', quizFormData) //! убрать (это для проверки на сервере)
+				// postData('../server.php', formData) //! убрать (это для проверки на сервере)
 			}
 		});
 	});

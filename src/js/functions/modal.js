@@ -12,7 +12,7 @@
 //* small-fix - добавить класс для маленьких блоков с position: absolute или fixed (добавится margin)
 //* data-inside - добавить кнопкам внутри модального окна, которые открывают следующее модальное окно (что бы сохранить фокус на кнопке вне окна)
 
-bindModal('.modal-btn', '.modal-prod');
+bindModal('.cart-btn', '.modal-cart');
 
 let lastFocus = false;
 

@@ -13,7 +13,7 @@ $transition-time: 0.5s;
 	text-align: center;
 	cursor: pointer;
 	pointer-events: none;
-	// overflow-y: auto;
+	overflow-y: auto;
 	opacity: 0;
 	visibility: hidden;
 	transition: opacity $transition-time, visibility $transition-time;
@@ -84,7 +84,6 @@ $transition-time: 0.5s;
 		align-items: flex-start;
 		justify-content: flex-start;
 		flex-wrap: wrap;
-		// height: 100%;
 	}
 }
 

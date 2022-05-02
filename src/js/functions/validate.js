@@ -72,7 +72,7 @@ function formAddError(item) {
 			quizError.classList.add('active');
 		}
 	} else {
-		let formError = item.parentElement.querySelector('.form-error');
+		let formError = item.parentElement.querySelector('.form-message');
 		if (formError) {
 			formError.classList.add('active');
 		}

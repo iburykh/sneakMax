@@ -27,7 +27,7 @@
 							<li class="menu__item"><a href="#" class="menu__link">Наша команда</a></li>
 							<li class="menu__item"><a href="#" class="menu__link">Доставка и оплата</a></li>
 							<li class="menu__item"><a href="#" class="menu__link">Контакты</a></li>
-							<li class="menu__item"><a href="#" class="menu__link">Корзина</a></li>
+							<!-- <li class="menu__item"><a href="#" class="menu__link">Корзина</a></li> -->
 						</ul>
 					</nav>
 					<button class="cart btn-reset">
@@ -74,7 +74,7 @@
 								<span class="mini-cart__txt">Итого:</span>
 								<span class="mini-cart__summ">25 789 р</span>
 							</div>
-							<button class="mini-cart__btn btn btn-reset">Перейти в корзину</button>
+							<button class="mini-cart__btn btn btn-reset cart-btn">Перейти в корзину</button>
 						</div>
 					</div>
 					<button class="hamburger btn-reset" aria-label="открыть навигацию">
@@ -629,12 +629,59 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- <div class="modal modal-name" role="dialog" aria-hidden="true" data-modal>
-			<button class="modal__close btn-reset" aria-label="закрыть окно">&times;</button>
-			<input name="name" placeholder="Имя" type="text" autocomplete="on" class="input">
-			<button class="modal-name__next btn-reset" data-inside>Следующее окно</button>
-		</div> -->
+		<div class="modal modal-cart" role="dialog" aria-hidden="true" data-modal>
+			<button class="modal__close btn-reset" aria-label="закрыть окно"></button>
+			<div class="modal-cart__content">
+				<div class="modal-cart__top">
+					<h3 class="modal-cart__title">Оформление заказа</h3>
+					<span class="modal-cart__number">Заказ 3456 67</span>
+				</div>
+				<div class="modal-cart-order">
+					<div class="modal-cart-order__quantity">Товаров в заказе: <span>3 шт</span></div>
+					<div class="modal-cart-order__summ">Общая сумма заказа: <span>25 789 р</span></div>
+					<button class="modal-cart-order__show btn-reset modal-cart-order__show--active">Состав заказа</button>
+					<ul class="modal-cart-order__list list-reset">
+						<li class="modal-cart-product">
+							<div class="modal-cart-product__image">
+								<img src="img/image.jpg" alt="изображение" width="80" height="80">
+							</div>
+							<div class="modal-cart-product__content">
+								<h3 class="modal-cart-product__title">Женские кроссовки Puma Force 1 Shadow</h3>
+								<span class="modal-cart-product__price">8 678 p</span>
+							</div>
+							<button class="modal-cart-product__delete btn-reset">Удалить</button>
+						</li>
+						<!-- <li class="modal-cart-product">
+							<div class="modal-cart-product__image">
+								<img src="img/image.jpg" alt="изображение" width="80" height="80">
+							</div>
+							<div class="modal-cart-product__content">
+								<h3 class="modal-cart-product__title">Женские кроссовки Puma Force 1 Shadow</h3>
+								<span class="modal-cart-product__price">8 678 p</span>
+							</div>
+							<button class="modal-cart-product__delete btn-reset">Удалить</button>
+						</li>
+						<li class="modal-cart-product">
+							<div class="modal-cart-product__image">
+								<img src="img/image.jpg" alt="изображение" width="80" height="80">
+							</div>
+							<div class="modal-cart-product__content">
+								<h3 class="modal-cart-product__title">Женские кроссовки Puma Force 1 Shadow</h3>
+								<span class="modal-cart-product__price">8 678 p</span>
+							</div>
+							<button class="modal-cart-product__delete btn-reset">Удалить</button>
+						</li> -->
+					</ul>
+				</div>
+				<form action="#" class="modal-cart-form">
+					<input name="name" placeholder="Ваше имя" type="text" autocomplete="on" class="modal-cart-form__input">
+					<input name="phone" placeholder="Номер телефона" type="text" autocomplete="on" class="modal-cart-form__input tel">
+					<input name="email" placeholder="E-mail" type="text" autocomplete="on" class="modal-cart-form__input email">
+					<button class="modal-cart-form__submit btn btn-reset">Оформить заказ</button>
+					<div class="modal-cart-form__message form-message">Пожалуйста, заполните все поля!</div>
+				</form>
+			</div>
+		</div>
 	</div>
 
 	<!-- <script async src="resources/zenscroll.min.js"></script> -->
