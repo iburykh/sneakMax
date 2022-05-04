@@ -8,10 +8,10 @@ hamburger.addEventListener('click', () => {
 
     if (hamburger.classList.contains('active')) {
         hamburger.setAttribute('aria-label', 'закрыть навигацию');
-        disableScrollBurger();
+        disableScroll();
     } else {
         hamburger.setAttribute('aria-label', 'открыть навигацию');
-        enableScrollBurger();
+        enableScroll();
     }
 
     setTimeout(() => {
@@ -26,25 +26,10 @@ menuItem.forEach(item => {
             hamburger.classList.remove('active');
             menuBody.classList.remove('active');
             hamburger.setAttribute('aria-label', 'открыть навигацию');
-            enableScrollBurger();
+            enableScroll();
         }
     })
 })
-
-function disableScrollBurger() {
-    let pagePosition = window.scrollY;
-    document.body.classList.add('scroll-lock');
-    document.body.dataset.position = pagePosition;
-    document.body.style.top = -pagePosition + 'px';
-}
-
-function enableScrollBurger() {
-    let pagePosition = parseInt(document.body.dataset.position, 10);
-    document.body.style.top = '';
-    document.body.classList.remove('scroll-lock');
-    window.scroll({ top: pagePosition, left: 0 });
-    document.body.removeAttribute('data-position');
-}
 
 let filter = document.querySelector('.catalog__filters');
 let filterBtn = document.querySelector('.catalog__btn');

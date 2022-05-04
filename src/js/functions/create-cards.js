@@ -46,7 +46,7 @@ const modalSlider = () => {
 
 if (catalogProducts) {
 	//* функция создания карточек в каталоге товаров
-	const getProducts = async (quantity = 5) => {
+	const loadProducts = async (quantity = 5) => {
 		let response = await fetch('../data/data.json');
 		if (response.ok) {
 			let data = await response.json();
@@ -68,7 +68,7 @@ if (catalogProducts) {
 									<button class="catalog-item__btn btn-reset modal-btn" data-id="${item.id}" aria-label="Показать информацию о товаре">
 										<svg><use xlink:href="img/sprite.svg#show"></use></svg>
 									</button>
-									<button class="catalog-item__btn btn-reset" data-id="${item.id}" aria-label="Добавить товар в корзину">
+									<button class="catalog-item__btn btn-reset add-to-cart-btn" data-id="${item.id}" aria-label="Добавить товар в корзину">
 										<svg><use xlink:href="img/sprite.svg#cart"></use></svg>
 									</button>
 								</div>
@@ -79,9 +79,10 @@ if (catalogProducts) {
 					`;
 				}
 			}
+			cartLogic();
 
 			// функцию модального окна запускать тут
-			bindModal('.modal-btn', '.modal-prod', getModalData);
+			bindModal('.modal-btn', '.modal-prod', loadModalData);
 			//TODO - добавить аргумент func в функцию bindModal(btnSelector, modalSelector, func, animate='fade', speed=300,)
 			//TODO - вставить этот код в функцию bindModal (модальное окно) в момент открытия окна после получения lastFocus
 			// получение id кнопки
@@ -105,7 +106,7 @@ if (catalogProducts) {
 										<button class="catalog-item__btn btn-reset modal-btn" data-id="${item.id}" aria-label="Показать информацию о товаре">
 											<svg><use xlink:href="img/sprite.svg#show"></use></svg>
 										</button>
-										<button class="catalog-item__btn btn-reset" data-id="${item.id}" aria-label="Добавить товар в корзину">
+										<button class="catalog-item__btn btn-reset add-to-cart-btn" data-id="${item.id}" aria-label="Добавить товар в корзину">
 											<svg><use xlink:href="img/sprite.svg#cart"></use></svg>
 										</button>
 									</div>
@@ -121,7 +122,8 @@ if (catalogProducts) {
 				} else {
 					catalogMore.style.display = 'block';
 				}
-				bindModal('.modal-btn', '.modal-prod', getModalData);
+				cartLogic();
+				bindModal('.modal-btn', '.modal-prod', loadModalData);
 			});
 
 		} else {
@@ -129,10 +131,10 @@ if (catalogProducts) {
 		}
 	};
 
-	getProducts(prodQuantity);
+	loadProducts();
 
 	//* функция создания окна товара
-	const getModalData = async (id = 1) => {
+	const loadModalData = async (id = 1) => {
 		let response = await fetch('../data/data.json');
 		if (response.ok) {
 			let data = await response.json();
@@ -239,4 +241,123 @@ if (catalogProducts) {
 	// 	}
 	// });
 
+	//* работа корзины
+
+	let price = 0;
+	const miniCartList = document.querySelector('.mini-cart__list');
+	const fullPrice = document.querySelector('.mini-cart__summ');
+	const cartCount = document.querySelector('.cart__count');
+
+	const priceWithoutSpaces = (str) => {
+		return str.replace(/\s/g, '');
+	};
+
+	const plusFullPrice = (currentPrice) => {
+		return price += currentPrice;
+	};
+
+	const minusFullPrice = (currentPrice) => {
+		return price -= currentPrice;
+	};
+	  
+	const printFullPrice = () => {
+		fullPrice.textContent = `${normalPrice(price)} р`;
+	};
+	  
+	const printQuantity = (num) => {
+		cartCount.textContent = num;
+	};
+
+	const loadCartData = async (id = 1) => {
+		let response = await fetch('../data/data.json');
+		if (response.ok) {
+			let data = await response.json();
+
+			for (let dataItem of data) {
+				if (dataItem.id == id) {
+					miniCartList.insertAdjacentHTML('afterbegin', `
+						<li class="mini-cart__item" data-id="${dataItem.id}">
+							<div class="mini-cart__image">
+								<img src="${dataItem.mainImage}" alt="${dataItem.title}" width="100" height="100">
+							</div>
+							<div class="mini-cart__content">
+								<h3 class="mini-cart__title">${dataItem.title}</h3>
+								<span class="mini-cart__price">${normalPrice(dataItem.price)} p</span>
+							</div>
+							<button class="mini-cart__delete btn-reset"></button>
+						</li>
+					`);
+
+					plusFullPrice(dataItem.price);
+					printFullPrice();	
+				}
+			}
+
+			const miniCartItem = document.querySelectorAll('.mini-cart__list .mini-cart__item');
+					
+			let num = miniCartItem.length;
+		
+			if (num > 0) {
+			  cartCount.classList.add('cart__count--active');
+			}
+	
+			printQuantity(num);
+
+			miniCartItem.forEach(item => {
+				item.addEventListener('click', (e) => {
+					
+					miniCartItem.forEach(btn => {
+						if (!btn.contains(e.target)) {
+							btn.classList.remove('mini-cart__item--active');
+						}
+					});
+	
+					item.classList.add('mini-cart__item--active');
+				});
+			});
+
+		}  else {
+			console.log(('error', response.status));
+		}
+
+	};
+
+	const cartLogic = () => {
+		const productBtn = document.querySelectorAll('.add-to-cart-btn');
+
+		productBtn.forEach(el => {
+			el.addEventListener('click', (e) => {
+				const id = e.currentTarget.dataset.id;
+				loadCartData(id);
+				document.querySelector('.cart').classList.remove('cart--inactive');
+				e.currentTarget.classList.add('catalog-item__btn--disabled');
+			});
+		});
+
+		miniCartList.addEventListener('click', (e) => {
+			if (e.target.classList.contains('mini-cart__delete')) {
+				const self = e.target;
+				const parent = self.closest('.mini-cart__item');
+				const price = parseInt(priceWithoutSpaces(parent.querySelector('.mini-cart__price').textContent));
+				const id = parent.dataset.id;
+		
+				document.querySelector(`.add-to-cart-btn[data-id="${id}"]`).classList.remove('catalog-item__btn--disabled');
+		
+				parent.remove();
+		
+				minusFullPrice(price);
+				printFullPrice();
+		
+				let num = document.querySelectorAll('.mini-cart__list .mini-cart__item').length;
+		
+				if (num == 0) {
+					cartCount.classList.remove('cart__count--active');
+					miniCart.classList.remove('mini-cart--open');
+					document.querySelector('.cart').classList.add('cart--inactive');
+				}
+		
+				printQuantity(num);
+			}
+		});
+	};
 }

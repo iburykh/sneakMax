@@ -146,20 +146,20 @@ function bindModal(btnSelector, modalSelector, func, animate='fade', speed=500,)
 		focusTrap();
 	}
 
-    function disableScroll() {
-        let pagePosition = window.scrollY;
-        document.body.classList.add('scroll-lock');
-        document.body.dataset.position = pagePosition;
-        document.body.style.top = -pagePosition + 'px';
-    }
+    // function disableScroll() {
+    //     let pagePosition = window.scrollY;
+    //     document.body.classList.add('scroll-lock');
+    //     document.body.dataset.position = pagePosition;
+    //     document.body.style.top = -pagePosition + 'px';
+    // }
 
-    function enableScroll() {
-        let pagePosition = parseInt(document.body.dataset.position, 10);
-        document.body.style.top = '';
-        document.body.classList.remove('scroll-lock');
-        window.scroll({ top: pagePosition, left: 0 });
-        document.body.removeAttribute('data-position');
-    }
+    // function enableScroll() {
+    //     let pagePosition = parseInt(document.body.dataset.position, 10);
+    //     document.body.style.top = '';
+    //     document.body.classList.remove('scroll-lock');
+    //     window.scroll({ top: pagePosition, left: 0 });
+    //     document.body.removeAttribute('data-position');
+    // }
 
     function focusTrap() {
 		// const nodes = this.modalContainer.querySelectorAll(this._focusElements); //* для фокуса на первом элементе окна

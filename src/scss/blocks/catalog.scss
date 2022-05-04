@@ -188,6 +188,10 @@
 				background-color: $color-dark-text;
 			}
 		}
+		&--disabled {
+			opacity: 0.4;
+			pointer-events: none;
+		}
 	}
 
 	&__title {

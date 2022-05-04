@@ -85,7 +85,7 @@
 .cart {
 	display: block;
 	position: relative;
-	margin-left: 10px;
+	margin-left: 20px;
 	width: 20px;
 	height: 20px;
 	svg {
@@ -96,20 +96,31 @@
 		object-fit: cover;
 		pointer-events: none;
 	}
+	&--inactive {
+		pointer-events: none;
+	}
 }
 .cart__count {
 	position: absolute;
 	right: -6px;
 	bottom: -2px;
-	width: 16px;
-	height: 16px;
+	min-width: 18px;
+	height: 18px;
+	display: inline-flex;
+    align-items: center;
+    justify-content: center;
 	background-color: $color-accent;
 	border-radius: 100%;
-	position: absolute;
 	font-weight: normal;
-	font-size: 14px;
+	font-size: 13px;
 	color: $color-white;
 	pointer-events: none;
+	opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+	&--active {
+		opacity: 1;
+		transition: opacity 0.3s ease-in-out;
+	}
 }
 
 .hamburger {
