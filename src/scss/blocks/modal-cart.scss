@@ -72,7 +72,7 @@
 			position: absolute;
 			top: 50%;
 			right: 0;
-			transform: translateY(-50%);
+			transform: translateY(-50%) rotate(180deg);
 			width: 10px;
 			height: 10px;
 			background: url('../img/angle.svg') center center/cover no-repeat;
@@ -80,13 +80,22 @@
 		}
 		&--active {
 			&::before {
-				transform: translateY(-50%) rotate(180deg);
+				transform: translateY(-50%);
 			}
 		}
 	}
 
 	&__list {
 		margin-top: 20px;
+		overflow: hidden;
+		max-height: 0;
+		box-sizing: content-box;
+		opacity: 0;
+		transition: all 0.3s ease-out;
+		will-change: max-height;
+		&--open {
+			opacity: 1;
+		}
 	}
 }
 
@@ -95,6 +104,7 @@
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 14px;
+	transition: all 0.3s ease 0s;
 	&:last-child {
 		margin-bottom: 0;
 	}

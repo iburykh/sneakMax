@@ -7,20 +7,8 @@ cartBtn.addEventListener('click', () => {
 });
 
 document.addEventListener('click', (e) => {
-	if (!e.target.classList.contains('mini-cart') && !e.target.closest('.mini-cart') && !e.target.classList.contains('cart') && !e.target.classList.contains('mini-cart__delete')) {
+	if (!e.target.classList.contains('mini-cart') && !e.target.closest('.mini-cart') && !e.target.classList.contains('cart') && !e.target.classList.contains('mini-cart__delete')
+	|| e.target.classList.contains('mini-cart__btn')) {
 		miniCart.classList.remove('mini-cart--open');
 	}
 });
-
-// miniCartItem.forEach(item => {
-// 	item.addEventListener('click', (e) => {
-		
-// 		miniCartItem.forEach(btn => {
-// 			if (!btn.contains(e.target)) {
-// 				btn.classList.remove('mini-cart__item--active');
-// 			}
-// 		});
-
-// 		item.classList.add('mini-cart__item--active');
-// 	});
-// });
