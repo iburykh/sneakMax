@@ -1,5 +1,3 @@
-//* Если есть слайдер в модальном окне - инициировать слайдеры в функции modalSlider и объявлять после создания окна
-
 const catalogProducts = document.querySelector('.catalog__wrap');
 const catalogMore = document.querySelector('.catalog__more');
 const prodModal = document.querySelector('.modal-prod__content');
@@ -18,6 +16,7 @@ const normalPrice = (str) => {
 	return String(str).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
 };
 
+// если есть слайдер в модальном окне - инициировать слайдеры в функции modalSlider и объявлять после создания окна
 // функция инициализации слайдера
 const modalSlider = () => {
 	const minSlider = new Swiper('.slider-min', {
@@ -79,9 +78,9 @@ if (catalogProducts) {
 					`;
 				}
 			}
+			// функция работы корзины
 			cartLogic();
-
-			// функцию модального окна запускать тут
+			// функция модального окна
 			bindModal('.modal-btn', '.modal-prod', loadModalData);
 			//TODO - добавить аргумент func в функцию bindModal(btnSelector, modalSelector, func, animate='fade', speed=300,)
 			//TODO - вставить этот код в функцию bindModal (модальное окно) в момент открытия окна после получения lastFocus
@@ -122,6 +121,7 @@ if (catalogProducts) {
 				} else {
 					catalogMore.style.display = 'block';
 				}
+				// при добавлении новых товаров перезапускаются функции модального окна и корзины
 				cartLogic();
 				bindModal('.modal-btn', '.modal-prod', loadModalData);
 			});
@@ -230,10 +230,10 @@ if (catalogProducts) {
 
 	};
   
+	//* по клику на кнопку "Показать ещё" добавляем по 3 карточки товара (с перезагрузкой всех товаров) 
 	// catalogMore.addEventListener('click', (e) => {
-	// 	//* +3 - добавлять по з карточки товара
 	// 	prodQuantity = prodQuantity + addQuantity;
-	// 	getProducts(prodQuantity);
+	// 	loadProducts(prodQuantity);
 	// 	if (prodQuantity >= dataLength) {
 	// 		catalogMore.style.display = 'none';
 	// 	} else {
@@ -243,121 +243,98 @@ if (catalogProducts) {
 
 	//* работа корзины
 
-	let price = 0;
 	const miniCartList = document.querySelector('.mini-cart__list');
 	const fullPrice = document.querySelector('.mini-cart__summ');
 	const cartCount = document.querySelector('.cart__count');
 
+	// функция удаляет пробел между разрядами
 	const priceWithoutSpaces = (str) => {
 		return str.replace(/\s/g, '');
 	};
 
-	const plusFullPrice = (currentPrice) => {
-		return price += currentPrice;
-	};
-
-	const minusFullPrice = (currentPrice) => {
-		return price -= currentPrice;
-	};
-	  
-	const printFullPrice = () => {
-		fullPrice.textContent = `${normalPrice(price)} р`;
-	};
-	  
-	const printQuantity = (num) => {
-		cartCount.textContent = num;
-	};
-
-	const loadCartData = async (id = 1) => {
+	const cartLogic = async () => {
 		let response = await fetch('../data/data.json');
 		if (response.ok) {
 			let data = await response.json();
+			let price = 0;		
+			const productBtn = document.querySelectorAll('.add-to-cart-btn');
 
-			for (let dataItem of data) {
-				if (dataItem.id == id) {
-					miniCartList.insertAdjacentHTML('afterbegin', `
-						<li class="mini-cart__item" data-id="${dataItem.id}">
-							<div class="mini-cart__image">
-								<img src="${dataItem.mainImage}" alt="${dataItem.title}" width="100" height="100">
-							</div>
-							<div class="mini-cart__content">
-								<h3 class="mini-cart__title">${dataItem.title}</h3>
-								<span class="mini-cart__price">${normalPrice(dataItem.price)} p</span>
-							</div>
-							<button class="mini-cart__delete btn-reset"></button>
-						</li>
-					`);
+			// при нажатии на кнопку "добавить в корзину" - товар добавляется в корзину
+			productBtn.forEach(el => {
+				el.addEventListener('click', (e) => {
+					const id = e.currentTarget.dataset.id;
+					for (let dataItem of data) {
+						if (dataItem.id == id) {
+							miniCartList.insertAdjacentHTML('afterbegin', `
+								<li class="mini-cart__item" data-id="${dataItem.id}">
+									<div class="mini-cart__image">
+										<img src="${dataItem.mainImage}" alt="${dataItem.title}" width="100" height="100">
+									</div>
+									<div class="mini-cart__content">
+										<h3 class="mini-cart__title">${dataItem.title}</h3>
+										<span class="mini-cart__price">${normalPrice(dataItem.price)} p</span>
+									</div>
+									<button class="mini-cart__delete btn-reset"></button>
+								</li>
+							`);
+			
+							// прибавляем цену товара к общей сумме и выводим общую сумму
+							price += dataItem.price;
+							fullPrice.textContent = `${normalPrice(price)} р`;	
+						}
+					}
+					// получаем количество товара, добавляем его в показаель количества и делаем активным кружочек с количеством
+					let num = document.querySelectorAll('.mini-cart__item').length;
+					if (num > 0) {
+					  cartCount.classList.add('cart__count--active');
+					}
+					cartCount.textContent = num;
+			
+					// делаем значек корзины доступным для клика
+					document.querySelector('.cart').classList.remove('cart--inactive');
+					// знак добавления в корзину на товаре делаем недоступным
+					e.currentTarget.classList.add('catalog-item__btn--disabled');
+				});
+			});
 
-					plusFullPrice(dataItem.price);
-					printFullPrice();	
-				}
-			}
-
-			const miniCartItem = document.querySelectorAll('.mini-cart__list .mini-cart__item');
-					
-			let num = miniCartItem.length;
-		
-			if (num > 0) {
-			  cartCount.classList.add('cart__count--active');
-			}
+			miniCartList.addEventListener('click', (e) => {
+				// при клике на кнопку "удалить товар из корзины" удаляем единицу товара, меняем сумму и количество
+				if (e.target.classList.contains('mini-cart__delete')) {
+					const self = e.target;
+					const parent = self.closest('.mini-cart__item');
+					let priceDel = parseInt(priceWithoutSpaces(parent.querySelector('.mini-cart__price').textContent));
+					const id = parent.dataset.id;
+					document.querySelector(`.add-to-cart-btn[data-id="${id}"]`).classList.remove('catalog-item__btn--disabled');
+					parent.remove();
 	
-			printQuantity(num);
+					price -= priceDel;
+					fullPrice.textContent = `${normalPrice(price)} р`;
+			
+					// если товаров в корзине нет - закрываем окно корзины, делаем значек корзины недоступным и убираем кружек количества
+					let num = document.querySelectorAll('.mini-cart__list .mini-cart__item').length;
+					if (num == 0) {
+						cartCount.classList.remove('cart__count--active');
+						miniCart.classList.remove('mini-cart--open');
+						document.querySelector('.cart').classList.add('cart--inactive');
+					}
+					cartCount.textContent = num;
 
-			miniCartItem.forEach(item => {
-				item.addEventListener('click', (e) => {
-					
-					miniCartItem.forEach(btn => {
+				} else if (e.target.closest('.mini-cart__item')) {
+					// выделяем товары в корзине при клике на них
+					const parent = e.target.closest('.mini-cart__item');
+					const cartItems = document.querySelectorAll('.mini-cart__list .mini-cart__item');
+					cartItems.forEach(btn => {
 						if (!btn.contains(e.target)) {
 							btn.classList.remove('mini-cart__item--active');
 						}
-					});
-	
-					item.classList.add('mini-cart__item--active');
-				});
+					});	
+
+					parent.classList.add('mini-cart__item--active');
+				}
 			});
 
 		}  else {
 			console.log(('error', response.status));
 		}
-
-	};
-
-	const cartLogic = () => {
-		const productBtn = document.querySelectorAll('.add-to-cart-btn');
-
-		productBtn.forEach(el => {
-			el.addEventListener('click', (e) => {
-				const id = e.currentTarget.dataset.id;
-				loadCartData(id);
-				document.querySelector('.cart').classList.remove('cart--inactive');
-				e.currentTarget.classList.add('catalog-item__btn--disabled');
-			});
-		});
-
-		miniCartList.addEventListener('click', (e) => {
-			if (e.target.classList.contains('mini-cart__delete')) {
-				const self = e.target;
-				const parent = self.closest('.mini-cart__item');
-				const price = parseInt(priceWithoutSpaces(parent.querySelector('.mini-cart__price').textContent));
-				const id = parent.dataset.id;
-		
-				document.querySelector(`.add-to-cart-btn[data-id="${id}"]`).classList.remove('catalog-item__btn--disabled');
-		
-				parent.remove();
-		
-				minusFullPrice(price);
-				printFullPrice();
-		
-				let num = document.querySelectorAll('.mini-cart__list .mini-cart__item').length;
-		
-				if (num == 0) {
-					cartCount.classList.remove('cart__count--active');
-					miniCart.classList.remove('mini-cart--open');
-					document.querySelector('.cart').classList.add('cart--inactive');
-				}
-		
-				printQuantity(num);
-			}
-		});
 	};
 }
