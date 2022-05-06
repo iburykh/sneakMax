@@ -165,6 +165,9 @@
 
 	&__submit {
 		margin-top: 20px;
+		&:disabled {
+			opacity: 0.7;
+		}
 		@media (max-width: 576px) {
 			margin: 20px auto 0px auto;
 		}

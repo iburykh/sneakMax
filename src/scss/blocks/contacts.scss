@@ -46,6 +46,10 @@
 				color: $color-dark-accent;
 			}
 		}
+		&:focus {
+			outline: none;
+			color: $color-dark-accent;
+		}
 		@media (max-width: 576px) {
 			margin-top: 20px;
 			font-size: 25px;
@@ -180,6 +184,10 @@
 			&:hover {
 				transform: scale(1.1)
 			}
+		}
+		&:focus {
+			outline: none;
+			transform: scale(1.1)
 		}
 		&_vk {
 			background-size: 24px;

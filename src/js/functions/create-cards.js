@@ -90,6 +90,21 @@ if (catalogProducts) {
 			// 	func(openBtnId);
 			// }
 
+			// делаем видимыми кнопки товара при фокусе (по умолчанию они скрыты)
+			const productsBtns = document.querySelectorAll('.catalog-item__btn');
+			productsBtns.forEach(el => {
+				el.addEventListener('focus', (e) => {
+					let parent = e.currentTarget.closest('.catalog-item__btns');
+					parent.classList.add('catalog-item__btns--active');
+				}, true);
+	  
+				el.addEventListener('blur', (e) => {
+					let parent = e.currentTarget.closest('.catalog-item__btns');
+					parent.classList.remove('catalog-item__btns--active');
+				}, true);
+			});
+			
+
 			// по клику на кнопку "Показать ещё" добавляем по 3 карточки товара (3 - это число addQuantity) 
 			catalogMore.addEventListener('click', (e) => {
 				let a = prodQuantity;
@@ -293,7 +308,7 @@ const cartLogic = async () => {
 				cartCount.textContent = num;
 		
 				// делаем значек корзины доступным для клика
-				document.querySelector('.cart').classList.remove('cart--inactive');
+				document.querySelector('.cart').removeAttribute('disabled');
 				// знак добавления в корзину на товаре делаем недоступным
 				e.currentTarget.classList.add('catalog-item__btn--disabled');
 			});
@@ -312,12 +327,13 @@ const cartLogic = async () => {
 				price -= priceDel;
 				fullPrice.textContent = `${normalPrice(price)} р`;
 		
-				// если товаров в корзине нет - закрываем окно корзины, делаем значек корзины недоступным и убираем кружек количества
+				// если товаров в корзине нет:
+				// закрываем окно корзины, делаем значек корзины недоступным, убираем кружек количества
 				let num = document.querySelectorAll('.mini-cart__list .mini-cart__item').length;
 				if (num == 0) {
 					cartCount.classList.remove('cart__count--active');
 					miniCart.classList.remove('mini-cart--open');
-					document.querySelector('.cart').classList.add('cart--inactive');
+					document.querySelector('.cart').setAttribute("disabled", "disabled");
 				}
 				cartCount.textContent = num;
 
@@ -373,6 +389,8 @@ openOrderModal.addEventListener('click', () => {
 	// 	}
 	// }, 100);
 
+	document.querySelector('.modal-cart-form__submit').removeAttribute("disabled", "disabled");
+
 	orderModalQuantity.textContent = `${productsQuantity} шт`;
 	orderModalSumm.textContent = fullPrice.textContent;
 });
@@ -390,9 +408,7 @@ orderModalShow.addEventListener('click', () => {
 	}
 });
 
-//! доделать ! кнопка добавления товара в корзину остается не активной после удаления товара из окна корзины
-
-// удоление товаров из окна корзины
+// удаление товаров из окна корзины
 orderModalList.addEventListener('click', (e) => {
 	if (e.target.classList.contains('modal-cart-product__delete')) {
 		const self = e.target;
@@ -405,6 +421,7 @@ orderModalList.addEventListener('click', (e) => {
 		// удаляем товары в окне и в мини-корзине
 		parent.remove();
 		document.querySelector(`.mini-cart__item[data-id="${id}"]`).remove();
+		document.querySelector(`.add-to-cart-btn[data-id="${id}"]`).classList.remove('catalog-item__btn--disabled');
 
 		// изменяем общую стоимость товаров в окне и в мини-корзине
 		priseFull -= priceItrm;
@@ -416,7 +433,8 @@ orderModalList.addEventListener('click', (e) => {
 		let num = document.querySelectorAll('.modal-cart-product').length;
 		if (num == 0) {
 			cartCount.classList.remove('cart__count--active');
-			document.querySelector('.cart').classList.add('cart--inactive');
+			document.querySelector('.cart').setAttribute("disabled", "disabled");
+			document.querySelector('.modal-cart-form__submit').setAttribute("disabled", "disabled");
 		}
 		cartCount.textContent = num; 
 

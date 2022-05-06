@@ -5,10 +5,14 @@
 	border-radius: 4px;
 	color: $color-white;
 	transition: all 0.3s ease 0s;
+	outline: none;
 	@media (hover: hover) and (pointer: fine) {
 		&:hover {
 			background-color: $color-dark-accent;
 		}
+	}
+	&:focus {
+		background-color: $color-dark-accent;
 	}
 
 }

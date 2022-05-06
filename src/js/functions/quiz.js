@@ -82,7 +82,7 @@ function send(form) {
 				// alert(result.message);
 
 				let result = await response.text(); // text() - для проверки на сервере, подключить server.php)
-				console.log(result); // это для проверки на сервере
+				// console.log(result); // это для проверки на сервере
 
 				if (textMessage) {
 					textMessage.textContent = 'Ok!';

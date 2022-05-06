@@ -28,6 +28,15 @@ if (forms.length > 0) {
 				//*========= FormData =========================
 				const formData = new FormData(item);
 				// formData.append('image', formImage.files[0]);
+				if (form.classList.contains('modal-cart-form')) {
+					document.querySelectorAll('.modal-cart-product').forEach((el, idx) => {
+						let title = el.querySelector('.modal-cart-product__title').textContent;
+						let price = el.querySelector('.modal-cart-product__price').textContent;
+						formData.append(`product-${idx + 1}`, `${title}, ${price}`);
+					});
+			  
+					formData.append(`summ`, `${document.querySelector('.modal-cart-order__summ span').textContent}`);
+				}
 
 				//* ===== Проверка формы =====
 				// for(var pair of formData.entries()) {
@@ -42,17 +51,18 @@ if (forms.length > 0) {
 					});	
 					if (response.ok) {
 
-						let result = await response.json(); // json() - для вывода сообщения;
-						alert(result.message);
+						// let result = await response.json(); // json() - для вывода сообщения;
+						// alert(result.message);
 
-						// let result = await response.text(); // text() - для проверки на сервере, подключить server.php)
+						let result = await response.text(); // text() - для проверки на сервере, подключить server.php)
 						// console.log(result); // это для проверки на сервере
 
 						if (textMessage) {
 							textMessage.textContent = 'Спасибо, скоро мы с вами свяжимся!';
 							textMessage.classList.add('active');
 						}
-						clearInputs(inputs);
+						// clearInputs(inputs);
+						form.reset();
 						setTimeout(() => {
 							if (textMessage) {
 								textMessage.classList.remove('active');
@@ -65,14 +75,15 @@ if (forms.length > 0) {
 							textMessage.classList.add('active');
 						}
 						setTimeout(() => {
+							// form.reset();
 							if (textMessage) {
 								textMessage.classList.remove('active');
 							}
 						}, 5000);
 					}
 				};
-				postData('../sendmail.php', formData);
-				// postData('../server.php', formData) //! убрать (это для проверки на сервере)
+				// postData('../sendmail.php', formData);
+				postData('../server.php', formData) //! убрать (это для проверки на сервере)
 			}
 		});
 	});

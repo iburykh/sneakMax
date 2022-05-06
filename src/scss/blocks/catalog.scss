@@ -59,6 +59,12 @@
 		font-weight: 400;
 		font-size: 16px;
 		color: $color-text;
+		transition: color 0.3s ease 0s;
+		@media (hover: hover) and (pointer: fine) {
+			&:hover {
+				color: $color-accent;
+			}
+		}
 	}
 
 	&__products {
@@ -162,6 +168,9 @@
 				opacity: 1;
 			}
 		}
+		&--active {
+			opacity: 1;
+		}
 	}
 
 	&__btn {
@@ -173,6 +182,7 @@
 		width: 80px;
 		height: 80px;
 		background-color: $color-text;
+		outline: none;
 		transition: background-color 0.3s ease-in-out;
 		&:last-child {
 			margin-right: 0;

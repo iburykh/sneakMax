@@ -116,12 +116,17 @@
 		color: $color-text;
 		border: solid 1px $color-dark-text;
 		border-radius: 4px;
+		outline: none;
 		transition: all 0.3s ease 0s;
 		@media (hover: hover) and (pointer: fine) {
 			&:hover {
 				color: $color-white;
 				background-color: $color-text;
 			}
+		}
+		&:focus {
+			color: $color-white;
+			background-color: $color-text;
 		}
 		@media (max-width: 576px) {
 			margin-top: 10px;
