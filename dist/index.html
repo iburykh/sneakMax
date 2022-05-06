@@ -34,20 +34,19 @@
 </head>
 
 <body>
-	<header id="up" class="header block-fix">
+	<header id="up" class="header up block-fix">
 		<div class="header__container container">
 			<div class="header__wrapper">
 				<a class="header__logo" aria-label="логотип">SneakMax</a>
 				<div class="header__menu">
 					<nav class="menu" tabindex="-1">
 						<ul class="menu__list list-reset">
-							<li class="menu__item"><a href="#" class="menu__link">Каталог</a></li>
-							<li class="menu__item"><a href="#" class="menu__link">О нас</a></li>
-							<li class="menu__item"><a href="#" class="menu__link">Подбор товара</a></li>
-							<li class="menu__item"><a href="#" class="menu__link">Наша команда</a></li>
-							<li class="menu__item"><a href="#" class="menu__link">Доставка и оплата</a></li>
-							<li class="menu__item"><a href="#" class="menu__link">Контакты</a></li>
-							<!-- <li class="menu__item"><a href="#" class="menu__link">Корзина</a></li> -->
+							<li class="menu__item"><a href="#catalog" class="menu__link scroll">Каталог</a></li>
+							<li class="menu__item"><a href="#about" class="menu__link scroll">О нас</a></li>
+							<li class="menu__item"><a href="#quiz" class="menu__link scroll">Подбор товара</a></li>
+							<li class="menu__item"><a href="#team" class="menu__link scroll">Наша команда</a></li>
+							<li class="menu__item"><a href="#questions" class="menu__link scroll">Доставка и оплата</a></li>
+							<li class="menu__item"><a href="#contacts" class="menu__link scroll">Контакты</a></li>
 						</ul>
 					</nav>
 					<button class="cart btn-reset" disabled>
@@ -57,16 +56,6 @@
 					<div class="mini-cart">
 						<div class="mini-cart__products" data-simplebar>
 							<ul class="mini-cart__list list-reset">
-								<!-- <li class="mini-cart__item mini-cart__item--active">
-									<div class="mini-cart__image">
-										<img src="img/image.jpg" alt="изображение" width="100" height="100">
-									</div>
-									<div class="mini-cart__content">
-										<h3 class="mini-cart__title">Женские кроссовки Puma Force 1 Shadow</h3>
-										<span class="mini-cart__price">8 678 p</span>
-									</div>
-									<button class="mini-cart__delete btn-reset"></button>
-								</li> -->
 							</ul>
 						</div>
 						<div class="mini-cart__footer">
@@ -514,13 +503,12 @@
 				<a class="footer__logo" aria-label="логотип">SneakMax</a>
 				<nav class="footer-menu">
 					<ul class="footer-menu__list list-reset">
-						<li class="footer-menu__item"><a href="#" class="footer-menu__link">Каталог</a></li>
-						<li class="footer-menu__item"><a href="#" class="footer-menu__link">О нас</a></li>
-						<li class="footer-menu__item"><a href="#" class="footer-menu__link">Подбор товара</a></li>
-						<li class="footer-menu__item"><a href="#" class="footer-menu__link">Наша команда</a></li>
-						<li class="footer-menu__item"><a href="#" class="footer-menu__link">Доставка и оплата</a></li>
-						<li class="footer-menu__item"><a href="#" class="footer-menu__link">Контакты</a></li>
-						<li class="footer-menu__item"><a href="#" class="footer-menu__link">Корзина</a></li>
+						<li class="footer-menu__item"><a href="#catalog" class="footer-menu__link scroll">Каталог</a></li>
+						<li class="footer-menu__item"><a href="#about" class="footer-menu__link scroll">О нас</a></li>
+						<li class="footer-menu__item"><a href="#quiz" class="footer-menu__link scroll">Подбор товара</a></li>
+						<li class="footer-menu__item"><a href="#team" class="footer-menu__link scroll">Наша команда</a></li>
+						<li class="footer-menu__item"><a href="#questions" class="footer-menu__link scroll">Доставка и оплата</a></li>
+						<li class="footer-menu__item"><a href="#contacts" class="footer-menu__link scroll">Контакты</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -534,28 +522,12 @@
 				<div class="modal-slider">
 					<div class="slider-main swiper">
 						<div class="slider-main__wrapper swiper-wrapper">
-							<!-- <div class="slider-main__item swiper-slide">
-								<img src="img/image.jpg" alt="изображение">
-							</div>
-							<div class="slider-main__item swiper-slide">
-								<img src="img/quiz_1.jpg" alt="изображение">
-							</div>
-							<div class="slider-main__item swiper-slide">
-								<img src="img/image.jpg" alt="изображение">
-							</div> -->
+
 						</div>
 					</div>
 					<div class="slider-min swiper">
 						<div class="slider-min__wrapper swiper-wrapper">
-							<!-- <div class="slider-min__item swiper-slide">
-								<img src="img/image.jpg" alt="изображение">
-							</div>
-							<div class="slider-min__item swiper-slide">
-								<img src="img/image.jpg" alt="изображение">
-							</div>
-							<div class="slider-min__item swiper-slide">
-								<img src="img/image.jpg" alt="изображение">
-							</div> -->
+
 						</div>
 					</div>
 				</div>
@@ -623,9 +595,7 @@
 					</div>
 				</div>
 				<div class="modal-video">
-					<!-- <iframe src="https://www.youtube.com/embed/HGiDY4NuTaM"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen></iframe> -->
+
 				</div>
 			</div>
 		</div>
@@ -684,7 +654,10 @@
 		</div>
 	</div>
 
-	<!-- <script async src="resources/zenscroll.min.js"></script> -->
+	<a href="#promo" class="pageup scroll" aria-label="к началу страницы">
+		<svg><use xlink:href="img/sprite.svg#arrow"></use></svg>
+	</a>
+
 	<script defer src="js/libs.js"></script>
 	<script defer src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 	<script defer src="js/main.js"></script>

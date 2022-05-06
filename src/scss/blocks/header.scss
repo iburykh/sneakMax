@@ -116,9 +116,6 @@
 		object-fit: cover;
 		pointer-events: none;
 	}
-	// &--inactive {
-	// 	pointer-events: none;
-	// }
 	&:disabled {
 		opacity: 0.7;
 	}

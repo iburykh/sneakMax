@@ -35,4 +35,33 @@ const clearInputs = (selector) => {
 	}
 };
 
-// window.noZensmooth = true;
+window.noZensmooth = true;
+
+let links = document.querySelectorAll('.scroll');
+
+
+links.forEach(link => {
+
+	link.addEventListener('click', function(event) {
+		event.preventDefault();
+
+		let hash = this.getAttribute('href').replace('#', '');
+		let toBlock = document.querySelector('.' + hash);
+
+		zenscroll.to(toBlock);
+
+		// zenscroll.to(toBlock, 500); // 500ms == время прокрутки
+	});
+});
+
+const upElem = document.querySelector('.pageup');
+
+window.addEventListener('scroll', () => {
+	let scrolled = window.pageYOffset || document.documentElement.scrollTop;
+	if (scrolled > 1300) {
+		upElem.classList.add('active');
+	} else {
+		upElem.classList.remove('active');
+	}
+});
+
