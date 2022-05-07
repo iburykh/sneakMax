@@ -90,51 +90,19 @@ if (catalogProducts) {
 			// 	func(openBtnId);
 			// }
 
-			
-			const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)')
-			const productsBtns = document.querySelectorAll('.catalog-item__btn');
-			const blocks = document.querySelectorAll('.catalog-item');
-
 			// делаем видимыми кнопки товара при фокусе (по умолчанию они скрыты)
+			const productsBtns = document.querySelectorAll('.catalog-item__btn');
 			productsBtns.forEach(el => {
 				el.addEventListener('focus', (e) => {
 					let parent = e.currentTarget.closest('.catalog-item__btns');
-					parent.classList.add('catalog-item__btns--active');
+					parent.classList.add('catalog-item__btns--focus');
 				}, true);
 	  
 				el.addEventListener('blur', (e) => {
 					let parent = e.currentTarget.closest('.catalog-item__btns');
-					parent.classList.remove('catalog-item__btns--active');
+					parent.classList.remove('catalog-item__btns--focus');
 				}, true);
-
-				// когда нет ховеров кнопки недоступны
-				if (!mediaQuery.matches) {
-					el.setAttribute("disabled", "disabled");
-				}
 			});
-
-			// когда нет ховеров кнопки появляются при тапе по товару
-			if (!mediaQuery.matches) {
-				blocks.forEach(item => {
-					item.addEventListener('click', (e) => {
-						let btns = e.currentTarget.querySelector('.catalog-item__btns');
-						let btn = btns.querySelectorAll('.catalog-item__btn');
-						if (e.target.closest('.catalog-item__img') && !btns.classList.contains('catalog-item__btns--activeMob')) {
-							btns.classList.add('catalog-item__btns--activeMob');
-							btn.forEach(el => {
-								el.removeAttribute('disabled');
-							});
-						} else if (e.target.closest('.catalog-item__img') && btns.classList.contains('catalog-item__btns--activeMob') ) {		
-							btns.classList.remove('catalog-item__btns--activeMob');
-							btn.forEach(el => {
-								el.setAttribute("disabled", "disabled");
-							});
-						}
-					});
-				});
-			}
-
-			// по клику на кнопку "Показать ещё" добавляем по 3 карточки товара (3 - это число addQuantity) 
 			catalogMore.addEventListener('click', (e) => {
 				let a = prodQuantity;
 				prodQuantity = prodQuantity + addQuantity;
@@ -278,17 +246,31 @@ if (catalogProducts) {
 		}
 
 	};
-  
-	//* по клику на кнопку "Показать ещё" добавляем по 3 карточки товара (с перезагрузкой всех товаров) 
-	// catalogMore.addEventListener('click', (e) => {
-	// 	prodQuantity = prodQuantity + addQuantity;
-	// 	loadProducts(prodQuantity);
-	// 	if (prodQuantity >= dataLength) {
-	// 		catalogMore.style.display = 'none';
-	// 	} else {
-	// 		catalogMore.style.display = 'block';
-	// 	}
-	// });
 
+	//* по тачу появляются кнопки товара
+	let isOpen = false;
+	catalogProducts.addEventListener('touchend', (e) => {
+		if (e.target.closest('.catalog-item__img')) {
+			let btns = e.target.closest('.catalog-item__btns');
+			let btn = btns.querySelectorAll('.catalog-item__btn');
+			if (!isOpen) {
+				btns.classList.add('catalog-item__btns--touch');
+				setTimeout(() => {
+					btn.forEach(el => {
+						el.style.pointerEvents = 'auto';
+					});
+				}, 100);
+				isOpen = true;
+		 	} else if (isOpen && !e.target.classList.contains('catalog-item__btn') && !e.target.classList.contains('add-to-cart-btn')) {
+				btns.classList.remove('catalog-item__btns--touch');
+				setTimeout(() => {
+					btn.forEach(el => {
+						el.style.pointerEvents = 'none';
+					});
+				}, 100);
+				isOpen = false;
+			}
+		}
+	});
 
 }

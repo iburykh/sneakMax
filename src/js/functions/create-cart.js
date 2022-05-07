@@ -51,7 +51,7 @@ const cartLogic = async () => {
 				// делаем значек корзины доступным для клика
 				document.querySelector('.cart').removeAttribute('disabled');
 				// знак добавления в корзину на товаре делаем недоступным
-				e.currentTarget.classList.add('catalog-item__btn--disabled');
+				e.currentTarget.setAttribute("disabled", "disabled");
 
 				updateStorage();
 			});
@@ -64,7 +64,7 @@ const cartLogic = async () => {
 				const parent = self.closest('.mini-cart__item');
 				let priceDel = parseInt(priceWithoutSpaces(parent.querySelector('.mini-cart__price').textContent));
 				const id = parent.dataset.id;
-				document.querySelector(`.add-to-cart-btn[data-id="${id}"]`).classList.remove('catalog-item__btn--disabled');
+				document.querySelector(`.add-to-cart-btn[data-id="${id}"]`).removeAttribute('disabled');
 				parent.remove();
 
 				price -= priceDel;
@@ -162,12 +162,11 @@ orderModalList.addEventListener('click', (e) => {
 		const priceItrm = parseInt(priceWithoutSpaces(parent.querySelector('.modal-cart-product__price').textContent));
 		let priseFull = parseInt(priceWithoutSpaces(fullPrice.textContent));
 		const id = parent.dataset.id;
-		console.log(priseFull);
 		
 		// удаляем товары в окне и в мини-корзине
 		parent.remove();
 		document.querySelector(`.mini-cart__item[data-id="${id}"]`).remove();
-		document.querySelector(`.add-to-cart-btn[data-id="${id}"]`).classList.remove('catalog-item__btn--disabled');
+		document.querySelector(`.add-to-cart-btn[data-id="${id}"]`).removeAttribute('disabled');
 
 		// изменяем общую стоимость товаров в окне и в мини-корзине
 		priseFull -= priceItrm;
@@ -237,7 +236,7 @@ const btnBlock = () =>  {
 		setTimeout(() => {
 			let btn = document.querySelector(`.add-to-cart-btn[data-id="${id}"]`);
 			if (btn) {
-				btn.classList.add('catalog-item__btn--disabled');
+				btn.setAttribute("disabled", "disabled");
 			}
 		}, 100);
 	});

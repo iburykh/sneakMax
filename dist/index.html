@@ -49,9 +49,9 @@
 							<li class="menu__item"><a href="#contacts" class="menu__link scroll">Контакты</a></li>
 						</ul>
 					</nav>
-					<button class="cart btn-reset" disabled>
+					<button class="cart btn-reset" disabled aria-label="корзина товаров">
 						<svg><use xlink:href="img/sprite.svg#cart"></use></svg>
-						<div class="cart__count"></div>
+						<span class="cart__count"></span>
 					</button>
 					<div class="mini-cart">
 						<div class="mini-cart__products" data-simplebar>
@@ -92,11 +92,11 @@
 		<div class="catalog__container container">
 			<h2 class="catalog__title title">Каталог</h2>
 			<button class="catalog-hamburger btn-reset" aria-label="открыть фильтр">
-				<div class="catalog-hamburger__lines">
-					<span></span>
-					<span></span>
-					<span></span>
-				</div>
+				<span class="catalog-hamburger__lines">
+					<span ></span>
+					<span ></span>
+					<span ></span>
+				</span>
 				<span class="catalog-hamburger__text">Фильтр</span>
 			</button>
 			<div class="catalog__wrapper">
@@ -438,7 +438,7 @@
 						<span class="accordion__title">Вопрос 1</span>
 						<span class="accordion__icon"></span>
 					</button>
-					<div class="accordion__content" aria-hidden="true">
+					<div class="accordion__content" aria-hidden="true" tabindex="-1">
 						А это ответ 1: в комплексе функционируют 6 детских садов с площадками, воспитателями и всякими другими людьми
 					</div>
 				</li>
@@ -447,7 +447,7 @@
 						<span class="accordion__title">Вопрос 2</span>
 						<span class="accordion__icon"></span>
 					</button>
-					<div class="accordion__content" aria-hidden="true">
+					<div class="accordion__content" aria-hidden="true" tabindex="-1">
 						А это ответ 2: в комплексе функционируют 6 детских садов с площадками, воспитателями и всякими другими людьми
 					</div>
 				</li>
@@ -461,7 +461,7 @@
 					<h2 class="contacts__title title">Контакты</h2>
 					<h3 class="contacts__subtitle">Главный офис</h3>
 					<span class="tooltip">
-						<button class="tooltip__btn btn-reset" aria-describedby="office">
+						<button class="tooltip__btn btn-reset" aria-describedby="office" aria-label="информация">
 							<svg><use xlink:href="img/sprite.svg#tooltip"></use></svg>
 						</button>
 						<span class="tooltip__txt" role="tooltip" id="office">

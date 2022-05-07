@@ -22,15 +22,11 @@ if (rangeSlider) {
 	const setRangeSlider = (i, value) => {
 		let arr = [null, null];
 		arr[i] = value;
-
-		console.log(arr);
-
 		rangeSlider.noUiSlider.set(arr);
 	};
 
 	inputs.forEach((el, index) => {
 		el.addEventListener('change', (e) => {
-			console.log(index);
 			setRangeSlider(index, e.currentTarget.value);
 		});
 	});
